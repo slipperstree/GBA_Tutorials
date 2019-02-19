@@ -120,6 +120,14 @@ typedef struct Ball
 	uint16 color;
 }Ball;
 
+void StartBall(Ball* a_ball) {
+	while (a_ball->xDir == 0)
+	{
+		a_ball->xDir = qran_range(-1, 2);
+	}
+	a_ball->yDir = qran_range(-1, 2);
+}
+
 void InitBall(Ball* a_ball, int32 a_x, int32 a_y, int32 a_size, int16 a_color)
 {
 	a_ball->x = a_x;
@@ -170,13 +178,7 @@ void DrawBall(Ball* a_ball)
 	drawRect(a_ball->x, a_ball->y, a_ball->size, a_ball->size, a_ball->color);
 }
 
-void StartBall(Ball* a_ball) {
-	while (a_ball->xDir == 0)
-	{
-		a_ball->xDir = qran_range(-1, 2);
-	}
-	a_ball->yDir = qran_range(-1, 2);
-}
+
 
 typedef struct Paddle
 {

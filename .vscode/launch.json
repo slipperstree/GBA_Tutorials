@@ -8,26 +8,34 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
+            "cwd": "${workspaceRoot}",
             "preLaunchTask": "gdb-debug", 
-            "serverLaunchTimeout": 20000,
+            "postDebugTask": "stop emulation",
+            "serverLaunchTimeout": 10000,
             "stopAtEntry": true,
-            "program": "${workspaceRoot}/001_GBA_Hello_Pixel.elf",
+            "program": "${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.elf",
             "MIMode": "gdb",
             "externalConsole": true,
-            "cwd": "${workspaceRoot}",
             "targetArchitecture": "arm",
             "miDebuggerServerAddress": "localhost:2345",
-            "miDebuggerPath": "C:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
-            "setupCommands": [
-                {
-                   "description": "Enable pretty-printing for gdb",
-                   "ignoreFailures": true,
-                    "text": "file D:/GitHub/GBA/001_GBA_Hello_Pixel/001_GBA_Hello_Pixel.elf -enable-pretty-printing"
-                }
-            ]
-            
-            
-            
-        }
+            "windows": {
+                "miDebuggerPath": "C:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
+                "setupCommands": [
+                    {
+                    "description": "Enable pretty-printing for gdb",
+                    "ignoreFailures": true,
+                        "text": "file D:/GitHub/GBA/GBA_Tutorials/001_Hello_Pixel/001_Hello_Pixel.elf -enable-pretty-printing"
+                    }]
+            },
+            "osx":{
+                "miDebuggerPath": "/opt/devkitPro/devkitARM/bin/arm-none-eabi-gdb",
+                "setupCommands": [
+                    {
+                    "description": "Enable pretty-printing for gdb",
+                    "ignoreFailures": true,
+                        "text": "file /Users/jamies/GitHub/GBA/GBA_Tutorials/001_Hello_Pixel/001_Hello_Pixel.elf -enable-pretty-printing"
+                    }]
+            },
+        },
     ]
 }

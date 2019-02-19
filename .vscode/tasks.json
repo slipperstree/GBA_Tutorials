@@ -2,11 +2,19 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
+    "options":{
+        "cwd":"${workspaceFolder}/001_Hello_Pixel"
+    },
     "tasks": [
         { 
             "label": "stop emulation",
             "type":"shell",
-            "command":"taskkill /im mGBA.exe /F"
+            "windows": {
+                "command":"${workspaceFolder}/kill_mGBA.bat"
+            },
+            "osx": {
+                "command": "killall mGBA"
+            }
         },
         {
             "label": "make debug",
@@ -23,7 +31,6 @@
             "problemMatcher": []
         },
         {
-            //"dependsOn":"stop emulation",
             "label": "clean",
             "type": "shell",
             "command": "make clean"
@@ -31,23 +38,36 @@
         {
             "label": "gdb-debug",
             "type": "shell",
-            "dependsOn": ["stop Emulation", "make debug"],
+            "dependsOn": ["make debug"],
             "isBackground": false,
-            "command": "C:/mGBA/mGBA.exe -g ${workspaceFolder}/001_GBA_Hello_Pixel.gba;sleep 5;echo debuggerReady",
-            "problemMatcher": {
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": "debuggerReady",
-                    //"endsPattern": "^.*blah.*$"
-                }
+            "windows": {
+                "command": "C:/mGBA/mGBA.exe -g ${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.gba;sleep 5;echo debuggerReady"
+            },
+            "osx":{
+                "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
+                "args": ["-g", "${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.gba"]
+            },
+            "presentation": {
+                "clear": true,
+                "reveal": "always",
             }
         },
         {
             "label": "run",
             "type": "shell",
+            "dependsOn": ["make release"],
             "isBackground": true,
-            "command": "C:/NO$GBADebugger/NO$GBA.exe  ${workspaceFolder}/001_GBA_Hello_Pixel.elf",
-            "problemMatcher": []
+            "windows": {
+                "command": "C:/mGBA/mGBA.exe ${cwd}/001_Hello_Pixel/001_Hello_Pixel.gba"
+            },
+            "osx":{
+                "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
+                "args": ["${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.gba"]
+            },
+            "presentation": {
+                "clear": true,
+                "reveal": "always",
+            }
         }
     ]
 }
