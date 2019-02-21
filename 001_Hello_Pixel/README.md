@@ -1,7 +1,5 @@
 # 001_GBA_Hello_Pixel
 
-![Look It Works](./images/screenshot.PNG)
-
 This tutorial content comes from the tutoiral posted up [My First Pixels](https://jamiedstewart.github.io/gba%20dev/2019/02/16/GBA-Dev-My-First-Pixels.html) with the supporting YouTube video see here:
 
 [![YouTube Video](https://img.youtube.com/vi/Rj0lf46iljc/0.jpg)](https://www.youtube.com/embed/Rj0lf46iljc)
@@ -34,3 +32,5 @@ Line 54 & 76 : *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/001_
 *line 76 does not need from ";sleep..." onwards.* \
 **Only need to modify if you are using OS X** \
 Line 60 & 81: *"${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.gba"* \
+
+![Look It Works](./images/screenshot.PNG)
