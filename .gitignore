@@ -2,4 +2,5 @@
 **/*.gba
 **/*.elf
 **/*.sav
+**/build/
 xxx_VBlank_Interrupt/

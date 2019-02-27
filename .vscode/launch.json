@@ -13,18 +13,18 @@
             "postDebugTask": "stop emulation",
             "serverLaunchTimeout": 10000,
             "stopAtEntry": true,
-            "program": "${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.elf",
+            "program": "${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.elf",
             "MIMode": "gdb",
             "externalConsole": true,
             "targetArchitecture": "arm",
             "miDebuggerServerAddress": "localhost:2345",
             "windows": {
-                "miDebuggerPath": "C:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
+                "miDebuggerPath": "E:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
                 "setupCommands": [
                     {
                     "description": "Enable pretty-printing for gdb",
                     "ignoreFailures": true,
-                        "text": "file D:/GitHub/GBA/GBA_Tutorials/001_Hello_Pixel/001_Hello_Pixel.elf -enable-pretty-printing"
+                        "text": "file E:/GitHub/GBA/GBA_Tutorials/000_Hello_Pixel/000_Hello_Pixel.elf -enable-pretty-printing"
                     }]
             },
             "osx":{
@@ -33,7 +33,7 @@
                     {
                     "description": "Enable pretty-printing for gdb",
                     "ignoreFailures": true,
-                        "text": "file /Users/jamies/GitHub/GBA/GBA_Tutorials/001_Hello_Pixel/001_Hello_Pixel.elf -enable-pretty-printing"
+                        "text": "file /Users/jamies/GitHub/GBA/GBA_Tutorials/000_Hello_Pixel/000_Hello_Pixel.elf -enable-pretty-printing"
                     }]
             },
         },

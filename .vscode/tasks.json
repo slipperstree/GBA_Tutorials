@@ -3,14 +3,14 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "options":{
-        "cwd":"${workspaceFolder}/001_Hello_Pixel"
+        "cwd":"${workspaceFolder}/000_Hello_Pixel"
     },
     "tasks": [
-        { 
+        {
             "label": "stop emulation",
-            "type":"shell",
+            "type": "shell",
             "windows": {
-                "command":"${workspaceFolder}/kill_mGBA.bat"
+                "command": "${workspaceFolder}/kill_mGBA.bat"
             },
             "osx": {
                 "command": "killall mGBA"
@@ -20,14 +20,22 @@
             "label": "make debug",
             "type": "process",
             "command": "make",
-            "args": ["DEBUG=1"],
-            "problemMatcher": []
+            "args": [
+                "DEBUG=1"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "make release",
             "type": "process",
             "command": "make",
-            "args": ["DEBUG=0"],
+            "args": [
+                "DEBUG=0"
+            ],
             "problemMatcher": []
         },
         {
@@ -38,35 +46,44 @@
         {
             "label": "gdb-debug",
             "type": "shell",
-            "dependsOn": ["make debug"],
+            "dependsOn": [
+                "make debug"
+            ],
             "isBackground": false,
             "windows": {
-                "command": "C:/mGBA/mGBA.exe -g ${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.gba;sleep 5;echo debuggerReady"
+                "command": "E:/GBA/Emulators/mGBA-0.6.3-win32/mGBA.exe -g ${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba;sleep 5;echo debuggerReady"
             },
-            "osx":{
+            "osx": {
                 "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
-                "args": ["-g", "${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.gba"]
+                "args": [
+                    "-g",
+                    "${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba"
+                ]
             },
             "presentation": {
                 "clear": true,
-                "reveal": "always",
+                "reveal": "always"
             }
         },
         {
             "label": "run",
             "type": "shell",
-            "dependsOn": ["make release"],
+            "dependsOn": [
+                "make release"
+            ],
             "isBackground": true,
             "windows": {
-                "command": "C:/mGBA/mGBA.exe ${cwd}/001_Hello_Pixel/001_Hello_Pixel.gba"
+                "command": "E:/GBA/Emulators/mGBA-0.6.3-win32/mGBA.exe ${cwd}/000_Hello_Pixel/000_Hello_Pixel.gba"
             },
-            "osx":{
+            "osx": {
                 "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
-                "args": ["${workspaceFolder}/001_Hello_Pixel/001_Hello_Pixel.gba"]
+                "args": [
+                    "${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba"
+                ]
             },
             "presentation": {
                 "clear": true,
-                "reveal": "always",
+                "reveal": "always"
             }
         }
     ]
