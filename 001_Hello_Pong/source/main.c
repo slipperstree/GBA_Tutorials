@@ -1,6 +1,14 @@
+//\===========================================================================================================
+//\ Title: Main.c 
+//\ Author: Jamie Stewart
+//\ About: 
+//\        This is a simple implementation of Pong for the GBA that does not feature any user input and draws 
+//\   it's content to the screenbuffer using bitmap mode rendering. This implementation has the code for ball
+//\   movement and basic collision to keep the ball inside the bouds of the screen. A simple pseudo random 
+//\   number generator is introduced in this code too.
+//\===========================================================================================================
+
 #include "Intellisense.h"
-
-
 #include <stdint.h>
 #include <stdbool.h>
 
