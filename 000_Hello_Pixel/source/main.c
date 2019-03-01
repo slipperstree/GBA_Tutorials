@@ -13,31 +13,25 @@
 //\===========================================================================================================
 //\TYPEDEF our variables to indicate clearly what level of bit precision each variable has
 //\===========================================================================================================
-typedef uint8_t		u8;
-typedef uint16_t	u16;
-typedef uint32_t	u32;
-typedef int8_t		s8;
-typedef int16_t		s16;
-typedef int32_t		s32;
+typedef uint8_t		u8;		typedef int8_t		s8;
+typedef uint16_t	u16;	typedef int16_t		s16;
+typedef uint32_t	u32;	typedef int32_t		s32;
 //\===========================================================================================================
 //\ Volatile variables
 //\ The volatile key word indicates to the compiler, and the programmer. That these variables may have their values
 //\ altered by an external factor, this could be a hardware switch, or some external program that can access the 
 //\ memory location of the variable.
 //\===========================================================================================================
-typedef volatile uint8_t		v_u8;
-typedef volatile uint16_t		v_u16;
-typedef volatile uint32_t		v_u32;
-typedef volatile int8_t			v_s8;
-typedef volatile int16_t		v_s16;
-typedef volatile int32_t		v_s32;
+typedef volatile uint8_t		v_u8;	typedef volatile int8_t			v_s8;
+typedef volatile uint16_t		v_u16;	typedef volatile int16_t		v_s16;
+typedef volatile uint32_t		v_u32;	typedef volatile int32_t		v_s32;
 //\===========================================================================================================
 //\ Set up defines for making sense of some memory addresses
-#define REG_DISPCNT *((v_u16*)(0x04000000))
+#define REG_DISPCNT *((v_u32*)(0x04000000))
 #define VIDEOMODE_3 0x0003
 #define BGMODE_2	0x0400
 
-#define SCREENBUFFER ((s16*)(0x06000000))
+#define SCREENBUFFER ((v_u16*)(0x06000000))
 #define SCREEN_W 240
 #define SCREEN_H 160
 //\===========================================================================================================
@@ -61,27 +55,27 @@ u16 setColor(u8 a_red, u8 a_green, u8 a_blue)
 	return (a_red & 0x1F) | (a_green & 0x1F) << 5 | (a_blue & 0x1f) << 10;
 }
 //\===========================================================================================================
-void plotPixel( s32 a_x, s32 a_y, u16 a_colour)
+void plotPixel( u32 a_x, u32 a_y, u16 a_colour)
 {
 	SCREENBUFFER[a_y * SCREEN_W + a_x] = a_colour;
 }
 
 //\===========================================================================================================
 //\function to fill a rectangular area of the screen with the colour value provided to it as the 5th argument.
-void drawRect(s32 a_left, s32 a_top, s32 a_width, s32 a_height, u16 a_color)
+void drawRect(u32 a_left, u32 a_top, u32 a_width, u32 a_height, u16 a_color)
 {
-	for (s32 y = 0; y < a_height; ++y)
+	for (u32 y = 0; y < a_height; ++y)
 	{
-		for (s32 x = 0; x < a_width; ++x)
+		for (u32 x = 0; x < a_width; ++x)
 		{
-			SCREENBUFFER[(a_top + y) * SCREEN_W + a_left + x] = a_color;//plotPixel(a_left + x, a_top + y, a_color);
+			SCREENBUFFER[ (a_top + y) * SCREEN_W + a_left + x ] = a_color;
 		}
 	}
 }
 //\===========================================================================================================
 //\ an implementation of bresenham's line drawing algorithm, allows lines to be drawn in any direction
 //\ from positive to negative direction, vertically or horizontally
-void drawLine(s32 a_x, s32 a_y, s32 a_x2, s32 a_y2, u16 a_colour)
+void drawLine(u32 a_x, u32 a_y, u32 a_x2, u32 a_y2, u16 a_colour)
 {
 	//Get the horizontal and vertical displacement of the line
 	s32 w = a_x2 - a_x; //w is width or horizontal distance
