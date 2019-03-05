@@ -2,7 +2,7 @@
 
 This tutorial content comes from the tutoiral posted up [My First Pixels](https://jamiedstewart.github.io/gba%20dev/2019/02/16/GBA-Dev-My-First-Pixels.html) with the supporting YouTube video see here:
 
-[![YouTube Video](https://img.youtube.com/vi/Rj0lf46iljc/0.jpg)](https://www.youtube.com/embed/Rj0lf46iljc)
+[![YouTube Video](https://img.youtube.com/vi/IfbZ9pYMZyQ/0.jpg)](https://youtu.be/IfbZ9pYMZyQ)
 
 A Simple Pixel plotter is created that allows for 16bit unsigned integer data to be written to the memory location of the *SCREENBUFFER* in one of the GBA's bitmap rendering modes. This pixel plotter covers line drawing and filling a rectangular area with a solid colour. The line plotting algorithm is taken from [Bresenham's Line Drawing Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) on Wikipedia.  
 
