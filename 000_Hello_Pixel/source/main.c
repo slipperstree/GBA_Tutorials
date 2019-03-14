@@ -13,31 +13,25 @@
 //\===========================================================================================================
 //\TYPEDEF our variables to indicate clearly what level of bit precision each variable has
 //\===========================================================================================================
-typedef uint8_t		uint8;
-typedef uint16_t	uint16;
-typedef uint32_t	uint32;
-typedef int8_t		int8;
-typedef int16_t		int16;
-typedef int32_t		int32;
+typedef uint8_t		u8;		typedef int8_t		s8;
+typedef uint16_t	u16;	typedef int16_t		s16;
+typedef uint32_t	u32;	typedef int32_t		s32;
 //\===========================================================================================================
 //\ Volatile variables
 //\ The volatile key word indicates to the compiler, and the programmer. That these variables may have their values
 //\ altered by an external factor, this could be a hardware switch, or some external program that can access the 
 //\ memory location of the variable.
 //\===========================================================================================================
-typedef volatile uint8_t		v_uint8;
-typedef volatile uint16_t		v_uint16;
-typedef volatile uint32_t		v_uint32;
-typedef volatile int8_t			v_int8;
-typedef volatile int16_t		v_int16;
-typedef volatile int32_t		v_int32;
+typedef volatile uint8_t		v_u8;	typedef volatile int8_t			v_s8;
+typedef volatile uint16_t		v_u16;	typedef volatile int16_t		v_s16;
+typedef volatile uint32_t		v_u32;	typedef volatile int32_t		v_s32;
 //\===========================================================================================================
 //\ Set up defines for making sense of some memory addresses
-#define REG_DISPLAYCONTROL *((v_uint32*)(0x04000000))
+#define REG_DISPCNT *((v_u32*)(0x04000000))
 #define VIDEOMODE_3 0x0003
 #define BGMODE_2	0x0400
 
-#define SCREENBUFFER ((v_int16*)(0x06000000))
+#define SCREENBUFFER ((v_u16*)(0x06000000))
 #define SCREEN_W 240
 #define SCREEN_H 160
 //\===========================================================================================================
@@ -48,52 +42,52 @@ typedef volatile int32_t		v_int32;
 //\ implementation). We then XOR this back into the original value which will remove the negative (this is two's 
 //\ compliment at work) and give us a positive value if the mask was negative we add one (mask is either 0 or -1)
 //\ and get our absolute number, no if statments involved. GBA code has to be quick.
-int32 abs(int32 a_val)
+s32 abs(s32 a_val)
 {
-	int32 mask = a_val >> 31;
+	s32 mask = a_val >> 31;
 	return (a_val ^ mask) - mask;
 }
 //\===========================================================================================================
 //\ Function takes three 8 bit values and uses these to set a 16 bit value, the & 0x1F ensures that the values are
 //\ all less than 5 bits in size, any number higher than 31 will be truncated.
-uint16 setColor(uint8 a_red, uint8 a_green, uint8 a_blue)
+u16 setColor(u8 a_red, u8 a_green, u8 a_blue)
 {
 	return (a_red & 0x1F) | (a_green & 0x1F) << 5 | (a_blue & 0x1f) << 10;
 }
 //\===========================================================================================================
-void plotPixel( int32 a_x, int32 a_y, uint16 a_colour)
+void plotPixel( u32 a_x, u32 a_y, u16 a_colour)
 {
 	SCREENBUFFER[a_y * SCREEN_W + a_x] = a_colour;
 }
 
 //\===========================================================================================================
 //\function to fill a rectangular area of the screen with the colour value provided to it as the 5th argument.
-void drawRect(int32 a_left, int32 a_top, int32 a_width, int32 a_height, uint16 a_color)
+void drawRect(u32 a_left, u32 a_top, u32 a_width, u32 a_height, u16 a_color)
 {
-	for (uint32 y = 0; y < a_height; ++y)
+	for (u32 y = 0; y < a_height; ++y)
 	{
-		for (uint32 x = 0; x < a_width; ++x)
+		for (u32 x = 0; x < a_width; ++x)
 		{
-			plotPixel(a_left + x, a_top + y, a_color);
+			SCREENBUFFER[ (a_top + y) * SCREEN_W + a_left + x ] = a_color;
 		}
 	}
 }
 //\===========================================================================================================
 //\ an implementation of bresenham's line drawing algorithm, allows lines to be drawn in any direction
 //\ from positive to negative direction, vertically or horizontally
-void drawLine(int32 a_x, int32 a_y, int32 a_x2, int32 a_y2, uint16 a_colour)
+void drawLine(u32 a_x, u32 a_y, u32 a_x2, u32 a_y2, u16 a_colour)
 {
 	//Get the horizontal and vertical displacement of the line
-	int32 w = a_x2 - a_x; //w is width or horizontal distance
-	int32 h = a_y2 - a_y; //h is the height or vertical displacement
+	s32 w = a_x2 - a_x; //w is width or horizontal distance
+	s32 h = a_y2 - a_y; //h is the height or vertical displacement
 	//work out what the change in x and y is with the d in these variables stands for delta
-	int32 dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
+	s32 dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
 
 	if (w<0) dx1 = dx2 = -1; else if (w>0) dx1 = dx2 = 1;
 	if (h<0) dy1 = -1; else if (h>0) dy1 = 1;
 	//which is the longest the horizontal or vertical step
-	int32 longest = abs(w); //assume that width is the longest displacement
-	int32 shortest = abs(h);
+	s32 longest = abs(w); //assume that width is the longest displacement
+	s32 shortest = abs(h);
 	if ( shortest > longest )	//oops it's the other way around reverse it
 	{
 		//use xor to swap longest and shortest around
@@ -102,9 +96,9 @@ void drawLine(int32 a_x, int32 a_y, int32 a_x2, int32 a_y2, uint16 a_colour)
 		dx2 = 0;
 	}
 	//geta  value that is half the longest displacement
-	int32 numerator = longest >> 1;
+	s32 numerator = longest >> 1;
 	//for each pixel across the longest span
-	for (int32 i = 0; i <= longest; ++i)
+	for (s32 i = 0; i <= longest; ++i)
 	{
 		//fill the pixel we're currently at
 		plotPixel( a_x, a_y, a_colour);
@@ -133,7 +127,7 @@ void drawLine(int32 a_x, int32 a_y, int32 a_x2, int32 a_y2, uint16 a_colour)
 int main()
 {
 	//set GBA rendering context to MODE 3 Bitmap Rendering and enable BG 2
-	REG_DISPLAYCONTROL = VIDEOMODE_3 | BGMODE_2;
+	REG_DISPCNT = VIDEOMODE_3 | BGMODE_2;
 
 
 	while (1) { //loop forever

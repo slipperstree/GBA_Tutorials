@@ -2,7 +2,7 @@
 
 This tutorial content comes from the tutoiral posted up [My First Pixels](https://jamiedstewart.github.io/gba%20dev/2019/02/16/GBA-Dev-My-First-Pixels.html) with the supporting YouTube video see here:
 
-[![YouTube Video](https://img.youtube.com/vi/Rj0lf46iljc/0.jpg)](https://www.youtube.com/embed/Rj0lf46iljc)
+[![YouTube Video](https://img.youtube.com/vi/RDehQfeNNNs/0.jpg)](https://www.youtube.com/embed/RDehQfeNNNs)
 
 This program introduces some of the code that goes into creating a game like Pong. How to read the IO registers for button input on the GBA is not covered in this tutorial, this tutorial covers the creation of a simple scene from the game of Pong up to the point that user input would be required to take the implementation further. This tutorial is an extention on the first tutorial which saw us creating some standard drawing routines to enable drawing of lines and boxes to the screen, if you felt like challenging yourself then you may have completed the further exercise for that tutorial to draw arcs and circles using Bresenham's Circle Drawing algorithm.
 
