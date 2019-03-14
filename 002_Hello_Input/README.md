@@ -13,7 +13,7 @@ To get this project to build and run from the root directory, the following file
 **.c_cpp_properties.json**\
 **On OS X modify**: Lines 8, 16\
 **On Linux modify**: Lines 31, 39\
-**On PC modify**: Lines 52, 69\
+**On PC modify**: Lines 48, 62\
 All lines should have the following text:  *"${workspaceFolder}/002_Hello_Input/include"*  
 
 **launch.json**  
