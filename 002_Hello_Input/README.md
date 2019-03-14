@@ -29,6 +29,6 @@ Line 06 : *"cwd":"${workspaceFolder}/002_Hello_Input"* \
 Line 54 & 76 : *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/002_Hello_Input/002_Hello_Input.gba;sleep 5;echo debuggerReady"* \
 *line 76 does not need from ";sleep..." onwards.* \
 **Only need to modify if you are using OS X** \
-Line 60 & 81: *"${workspaceFolder}/001_Hello_Pixel/002_Hello_Input.gba"* \
+Line 60 & 81: *"${workspaceFolder}/002_Hello_Input/002_Hello_Input.gba"* \
 
 ![Look It Works](./images/screenshot.PNG)
