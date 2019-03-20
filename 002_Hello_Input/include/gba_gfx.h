@@ -6,7 +6,7 @@
 #include "gba_types.h"
 
 //base address pointer for base register
-#define REG_DISPLAYCONTROL *((v_uint32*)(REG_BASE))
+#define REG_DISPCNT *((v_u32*)(REG_BASE))
 
 //Defines for settng up different video modes
 #define VIDEOMODE_0 0x0000  //Sprite Mode 0
@@ -23,7 +23,7 @@
 #define BGMODE_3	0x0800
 
 //vcount is used for testing for vertical blank
-#define REG_VCOUNT (*(v_uint16*)(REG_BASE + 0x06))
+#define REG_VCOUNT (*(v_u16*)(REG_BASE + 0x06))
 
 extern void vsync();
 

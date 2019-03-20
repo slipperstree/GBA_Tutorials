@@ -31,9 +31,6 @@
 */
 #define	SRAM		0x0E000000
 
-#ifndef	NULL
-#define	NULL	(void*)0
-#endif
 
 
 #endif //__GBA_REG_H__

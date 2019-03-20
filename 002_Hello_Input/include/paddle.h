@@ -5,12 +5,12 @@
 
 typedef struct Paddle
 {
-	int32 x, y, width, height;
-	uint16 color;
+	s32 x, y, width, height;
+	u16 color;
 }Paddle;
 
-extern void InitPaddle(Paddle* a_paddle, int32 a_x, int32 a_y, int32 a_width, int32 a_height, int16 a_color);
-extern void MovePaddle(Paddle* a_paddle, int32 a_val);
+extern void InitPaddle(Paddle* a_paddle, s32 a_x, s32 a_y, s32 a_width, s32 a_height, u16 a_color);
+extern void MovePaddle(Paddle* a_paddle, s32 a_val);
 extern void ClearPaddle(Paddle* a_paddle);
 extern void DrawPaddle(Paddle* a_paddle);
 

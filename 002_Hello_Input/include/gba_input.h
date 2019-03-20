@@ -13,11 +13,11 @@
 /*
 * Define for Hardware Key Input Register
 */
-#define REG_KEYINPUT	*(v_uint16*)(REG_BASE + 0x130)
+#define REG_KEYINPUT	*(v_u16*)(REG_BASE + 0x130)
 /*
 * Define for Hardware Key Interrupt Control Register
 */
-#define REG_KEYCNT		*(v_uint16*)(REG_BASE + 0x132)
+#define REG_KEYCNT		*(v_u16*)(REG_BASE + 0x132)
 
 typedef enum KEYS
 {
@@ -41,7 +41,7 @@ typedef enum KEYS
 
 #define KEY_MASK 0x03FF
 //Vars to hold the current and previous state of the hardware keys
-extern uint16 __currKeys, __prevKeys;
+extern u16 __currKeys, __prevKeys;
 //Function to test for Hardware Key Depress
 INLINE void PollKeys()
 {
@@ -49,14 +49,14 @@ INLINE void PollKeys()
 	__currKeys = ~REG_KEYINPUT & KEY_MASK;
 }
 
-INLINE uint16		currentKeyState()           { return __currKeys; }
-INLINE uint16		prevKeyState()              { return __prevKeys; }
-INLINE uint16		keyDown(uint16 a_key)       { return __currKeys & a_key; }
-INLINE uint16		keyUp(uint16 a_key)         { return ~__currKeys & a_key; }
-INLINE uint16		keyHeld(uint16 a_key)       { return (__currKeys & __prevKeys) & a_key; }
-INLINE uint16		keyReleased(uint16 a_key)   { return (~__currKeys & __prevKeys) & a_key; }
-INLINE uint16		keyHit(uint16 a_key)        { return (__currKeys & ~__prevKeys) & a_key; }
-INLINE uint16		keyStateChange(uint16 a_key){ return (__currKeys ^ __prevKeys) & a_key; }
+INLINE u16		currentKeyState()           { return __currKeys; }
+INLINE u16		prevKeyState()              { return __prevKeys; }
+INLINE u16		keyDown(u16 a_key)       { return __currKeys & a_key; }
+INLINE u16		keyUp(u16 a_key)         { return ~__currKeys & a_key; }
+INLINE u16		keyHeld(u16 a_key)       { return (__currKeys & __prevKeys) & a_key; }
+INLINE u16		keyReleased(u16 a_key)   { return (~__currKeys & __prevKeys) & a_key; }
+INLINE u16		keyHit(u16 a_key)        { return (__currKeys & ~__prevKeys) & a_key; }
+INLINE u16		keyStateChange(u16 a_key){ return (__currKeys ^ __prevKeys) & a_key; }
 
 typedef enum AXIS
 {
@@ -65,7 +65,7 @@ typedef enum AXIS
 
 }AXIS;
 
-INLINE int16	getAxis(AXIS a_val)
+INLINE s16	getAxis(AXIS a_val)
 {
 	switch (a_val)
 	{

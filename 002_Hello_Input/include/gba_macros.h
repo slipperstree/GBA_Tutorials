@@ -22,4 +22,9 @@ typedef SSIZE_T ssize_t;
 
 #define INLINE static inline
 
+
+#ifndef	NULL
+#define	NULL	(void*)0
+#endif
+
 #endif //__GBA_MACRO_H__

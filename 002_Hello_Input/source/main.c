@@ -12,9 +12,9 @@
 int main()
 {
 	//set GBA rendering context to MODE 3 Bitmap Rendering
-	REG_DISPLAYCONTROL = VIDEOMODE_3 | BGMODE_2;
+	REG_DISPCNT = VIDEOMODE_3 | BGMODE_2;
 
-	sqran(14);
+	gba_seed_rand(14);
 	Paddle p1;
 	InitPaddle(&p1,10, 60, 8, 40, setColor(0, 0, 31));
 	Paddle p2;
@@ -33,7 +33,7 @@ int main()
 
 		MoveBall(&ball);
 
-		int16 pDir = 0;
+		s16 pDir = 0;
 		if( keyDown(UP) )
 		{
 			pDir = -2;

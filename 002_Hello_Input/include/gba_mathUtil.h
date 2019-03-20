@@ -3,11 +3,11 @@
 
 #include "gba_types.h"
 
-extern int32 __qran_seed;
-extern int32 sqran(int32 a_val);
-extern int32 qran();
-extern int32 qran_range(int32 a_min, int32 a_max);
-extern int32 sign(int32 a_val);
-extern int32 abs(int32 a_val);
+extern s32 __gba_rand_seed;
+extern s32 gba_seed_rand(s32 a_val);
+extern s32 gba_rand();
+extern s32 gba_rand_range(s32 a_min, s32 a_max);
+extern s32 sign(s32 a_val);
+extern s32 abs(s32 a_val);
 
 #endif //__GBA_MATHUTIL_H__

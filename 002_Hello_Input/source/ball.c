@@ -5,12 +5,12 @@
 void StartBall(Ball* a_ball) {
 	while (a_ball->xDir == 0)
 	{
-		a_ball->xDir = qran_range(-1, 2);
+		a_ball->xDir = gba_rand_range(-1, 2);
 	}
-	a_ball->yDir = qran_range(-1, 2);
+	a_ball->yDir = gba_rand_range(-1, 2);
 }
 
-void InitBall(Ball* a_ball, int32 a_x, int32 a_y, int32 a_size, int16 a_color)
+void InitBall(Ball* a_ball, s32 a_x, s32 a_y, s32 a_size, u16 a_color)
 {
 	a_ball->x = a_x;
 	a_ball->y = a_y;

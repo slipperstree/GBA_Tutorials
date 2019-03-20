@@ -2,7 +2,7 @@
 #include "gba_mathUtil.h"
 #include"gba_drawing.h"
 
-void InitPaddle(Paddle* a_paddle, int32 a_x, int32 a_y, int32 a_width, int32 a_height, int16 a_color)
+void InitPaddle(Paddle* a_paddle, s32 a_x, s32 a_y, s32 a_width, s32 a_height, u16 a_color)
 {
 	a_paddle->x = a_x;
 	a_paddle->y = a_y;
@@ -11,7 +11,7 @@ void InitPaddle(Paddle* a_paddle, int32 a_x, int32 a_y, int32 a_width, int32 a_h
 	a_paddle->color = a_color;
 }
 
-void MovePaddle(Paddle* a_paddle, int32 a_val)
+void MovePaddle(Paddle* a_paddle, s32 a_val)
 {
 	a_paddle->y += a_val;
 	if (a_paddle->y < 0)
