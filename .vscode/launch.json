@@ -19,12 +19,12 @@
             "targetArchitecture": "arm",
             "miDebuggerServerAddress": "localhost:2345",
             "windows": {
-                "miDebuggerPath": "E:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
+                "miDebuggerPath": "C:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
                 "setupCommands": [
                     {
                     "description": "Enable pretty-printing for gdb",
                     "ignoreFailures": true,
-                        "text": "file E:/GitHub/GBA/GBA_Tutorials/000_Hello_Pixel/000_Hello_Pixel.elf -enable-pretty-printing"
+                        "text": "file D:/GitHub/GBA/GBA_Tutorials/000_Hello_Pixel/000_Hello_Pixel.elf -enable-pretty-printing"
                     }]
             },
             "osx":{

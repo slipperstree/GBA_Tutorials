@@ -4,4 +4,4 @@
 **/*.sav
 **/build/
 .vscode/ipch/
-xxx_VBlank_Interrupt/
+xxx_*/

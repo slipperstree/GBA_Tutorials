@@ -51,7 +51,7 @@
             ],
             "isBackground": false,
             "windows": {
-                "command": "E:/GBA/Emulators/mGBA-0.6.3-win32/mGBA.exe -g ${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba;sleep 5;echo debuggerReady"
+                "command": "C:/mGBA/mGBA.exe -g ${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba;sleep 5;echo debuggerReady"
             },
             "osx": {
                 "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
@@ -73,7 +73,7 @@
             ],
             "isBackground": true,
             "windows": {
-                "command": "E:/GBA/Emulators/mGBA-0.6.3-win32/mGBA.exe ${cwd}/000_Hello_Pixel/000_Hello_Pixel.gba"
+                "command": "C:/mGBA/mGBA.exe ${cwd}/000_Hello_Pixel/000_Hello_Pixel.gba"
             },
             "osx": {
                 "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
