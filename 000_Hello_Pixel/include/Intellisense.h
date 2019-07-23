@@ -15,9 +15,5 @@ typedef unsigned long __PTRDIFF_TYPE__;
 #define __extension__
 #endif
 
-#if defined(_MSC_VER)
-#include <BaseTsd.h>
-typedef SSIZE_T ssize_t;
-#endif
 
 #endif //__INTELLISENSE_H__

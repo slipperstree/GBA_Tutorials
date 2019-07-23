@@ -20,8 +20,9 @@ include $(DEVKITARM)/gba_rules
 # the makefile is found
 #
 #---------------------------------------------------------------------------------
-TARGET		:= $(notdir $(CURDIR))
-BUILD		:= build
+PROJDIR		:= $(CURDIR)/$(PWD)
+TARGET		:= $(PWD)
+BUILD		:= $(PWD)/build
 SOURCES		:= asm source resources
 INCLUDES	:= include resources
 DATA		:= data
@@ -66,21 +67,21 @@ LIBDIRS	:=	$(LIBGBA)
 ifneq ($(BUILDDIR), $(CURDIR))
 #---------------------------------------------------------------------------------
  
-export OUTPUT	:=	$(CURDIR)/$(TARGET)
+export OUTPUT	:=	$(PROJDIR)/$(TARGET)
  
-export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
-					$(foreach dir,$(DATA),$(CURDIR)/$(dir)) \
-					$(foreach dir,$(GRAPHICS),$(CURDIR)/$(dir))
+export VPATH	:=	$(foreach dir,$(SOURCES),$(PROJDIR)/$(dir)) \
+					$(foreach dir,$(DATA),$(PROJDIR)/$(dir)) \
+					$(foreach dir,$(GRAPHICS),$(PROJDIR)/$(dir))
 
 export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 
-CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
-CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
-SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
-BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
+CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(PWD)/$(dir)/*.c)))
+CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(PWD)/$(dir)/*.cpp)))
+SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(PWD)/$(dir)/*.s)))
+BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(PWD)/$(dir)/*.*)))
 
 ifneq ($(strip $(MUSIC)),)
-	export AUDIOFILES	:=	$(foreach dir,$(notdir $(wildcard $(MUSIC)/*.*)),$(CURDIR)/$(MUSIC)/$(dir))
+	export AUDIOFILES	:=	$(foreach dir,$(notdir $(wildcard $(PWD)/$(MUSIC)/*.*)),$(PROJDIR)/$(MUSIC)/$(dir))
 	BINFILES += soundbank.bin
 endif
 
@@ -106,8 +107,8 @@ export OFILES := $(OFILES_BIN) $(OFILES_SOURCES)
 
 export HFILES := $(addsuffix .h,$(subst .,_,$(BINFILES)))
 
-export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(CURDIR)/$(dir)) \
-					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
+export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(PROJDIR)/$(dir)) \
+					$(foreach dir,$(LIBDIRS),-I$(PWD)/$(dir)/include) \
 					-I$(CURDIR)/$(BUILD)
  
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
@@ -122,7 +123,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).gba $(TARGET).sav
+	rm -fr $(BUILD) $(PROJDIR)/$(TARGET).elf $(PROJDIR)/$(TARGET).gba $(PROJDIR)/$(TARGET).sav
  
  
 #---------------------------------------------------------------------------------

@@ -2,10 +2,21 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "options":{
-        "cwd":"${workspaceFolder}/000_Hello_Pixel"
-    },
+    "options": {
+        "env": {
+          "proj_working_dir": "PWD=000_Hello_Pixel",
+          "proj_name":"000_Hello_Pixel"
+        }
+     },
     "tasks": [
+        {
+            "label": "test env",
+            "type": "shell",
+            "command": "echo",
+            "args": [
+                "$env:proj_name"
+            ],
+        },
         {
             "label": "stop emulation",
             "type": "shell",
@@ -18,10 +29,11 @@
         },
         {
             "label": "make debug",
-            "type": "process",
+            "type": "shell",
             "command": "make",
             "args": [
-                "DEBUG=1"
+                "DEBUG=1",
+                "$env:proj_working_dir",
             ],
             "problemMatcher": [],
             "group": {
@@ -31,17 +43,22 @@
         },
         {
             "label": "make release",
-            "type": "process",
+            "type": "shell",
             "command": "make",
             "args": [
-                "DEBUG=0"
+                "DEBUG=0",
+                "$env:proj_working_dir"
             ],
             "problemMatcher": []
         },
         {
             "label": "clean",
             "type": "shell",
-            "command": "make clean"
+            "command": "make",
+            "args": [
+                "clean",
+                "$env:proj_working_dir",
+            ],
         },
         {
             "label": "gdb-debug",
@@ -51,14 +68,11 @@
             ],
             "isBackground": false,
             "windows": {
-                "command": "C:/mGBA/mGBA.exe -g ${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba;sleep 5;echo debuggerReady"
+                "command": "E:/GBA/Emulators/mGBA-0.6.3-win32/mGBA.exe -g ${workspaceFolder}/$env:proj_name/$env:proj_name.gba;sleep 5;echo debuggerReady"
             },
             "osx": {
                 "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
-                "args": [
-                    "-g",
-                    "${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba"
-                ]
+                "args": [ "-g", "${workspaceFolder}/$env:proj_name/$env:proj_name.gba" ]
             },
             "presentation": {
                 "clear": true,
@@ -73,13 +87,11 @@
             ],
             "isBackground": true,
             "windows": {
-                "command": "C:/mGBA/mGBA.exe ${cwd}/000_Hello_Pixel/000_Hello_Pixel.gba"
+                "command": "E:/GBA/Emulators/mGBA-0.6.3-win32/mGBA.exe ${cwd}/$env:proj_name/$env:proj_name.gba"
             },
             "osx": {
                 "command": "/Users/jamies/mGBA/mGBA.app/Contents/MacOS/mGBA",
-                "args": [
-                    "${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba"
-                ]
+                "args": [ "${workspaceFolder}/$env:proj_name/$env:proj_name.gba" ]
             },
             "presentation": {
                 "clear": true,
