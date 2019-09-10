@@ -49,7 +49,4 @@ void vblank_intr_wait();
 ARM void interruptHandler();
 void register_vblank_isr();
 
-void cpu_zero_memory(void* const dst, u32 len);
-void cpu_fast_cpy(void* const dst, void* const src, u32 len);
-
 #endif //__GBA_BIOS_H__
