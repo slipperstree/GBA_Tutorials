@@ -13,24 +13,27 @@ This project creates the basic set up for the game of pong and introduces some b
 To get this project to build and run from the root directory, the following files in the **.vscode** directory will need to be modified. On the following lines:
 
 **.c_cpp_properties.json**\
-**On OS X modify**: Lines 8, 16\
-**On Linux modify**: Lines 31, 39\
-**On PC modify**: Lines 48, 62\
-All lines should have the following text:  *"${workspaceFolder}/001_Hello_Pong/include"*  
+**Line 3 should read**: "proj_name":"001_Hello_Pong"\
 
 **launch.json**  
-Line 16 : *"program": "${workspaceFolder}/001_Hello_Pong/001_Hello_Pong.elf",* \
-**Only need to modify this line if you are using PC** \
-Line 27 : *"text": "file **path_to_root_directory**/001_Hello_Pong/001_Hello_Pong.elf -enable-pretty-printing"* \
-**Only need to modify this line if you are using OS X** \
-Line 36 : *"text": "file **path_to_root_directory**/001_Hello_Pong/001_Hello_Pong.elf -enable-pretty-printing"* \
+Line 7 : *"proj_name":"001_Hello_Pong"* \
+Line 20: *"program": "${workspaceFolder}/001_Hello_Pong/001_Hello_Pong.elf",*\
 
 **tasks.json**
-Line 06 : *"cwd":"${workspaceFolder}/001_Hello_Pong"* \
+Lines 05 - 10 :\
+```JSON
+"options": {
+        "env": {
+          "proj_working_dir": "PWD=001_Hello_Pong",
+          "proj_name":"001_Hello_Pong"
+        }
+     },
+```
+
  **Only need to modify if you are using PC** \
-Line 54 & 76 : *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/001_Hello_Pixel/001_Hello_Pong.gba;sleep 5;echo debuggerReady"* \
-*line 76 does not need from ";sleep..." onwards.* \
+Line 71: *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/001_Hello_Pong/001_Hello_Pong.gba;sleep 5;echo debuggerReady"* \
+Line 90: *"command": "**path_to_mGBA**/mGBA-0.6.3-win32/mGBA.exe ${cwd}/$env:proj_name/$env:proj_name.gba"* \
 **Only need to modify if you are using OS X** \
-Line 60 & 81: *"${workspaceFolder}/001_Hello_Pong/001_Hello_Pong.gba"* \
+Line 74 & 93: *"command": "**path_to_mGBA**/mGBA.app/Contents/MacOS/mGBA",* \
 
 ![Look It Works](./images/screenshot.PNG)

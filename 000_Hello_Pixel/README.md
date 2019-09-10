@@ -23,7 +23,7 @@ Lines 05 - 10 :\
 "options": {
         "env": {
           "proj_working_dir": "PWD=000_Hello_Pixel",
-          "proj_name":"000_Hello_Pixel"\
+          "proj_name":"000_Hello_Pixel"
         }
      },
 ```

@@ -11,24 +11,27 @@ This tutorial additionally introduces how to handle the volatile data that cn be
 To get this project to build and run from the root directory, the following files in the **.vscode** directory will need to be modified. On the following lines:
 
 **.c_cpp_properties.json**\
-**On OS X modify**: Lines 8, 16\
-**On Linux modify**: Lines 31, 39\
-**On PC modify**: Lines 48, 62\
-All lines should have the following text:  *"${workspaceFolder}/002_Hello_Input/include"*  
+**Line 3 should read**: "proj_name":"002_Hello_Input"\
 
 **launch.json**  
-Line 16 : *"program": "${workspaceFolder}/002_Hello_Input/002_Hello_Input.elf",* \
-**Only need to modify this line if you are using PC** \
-Line 27 : *"text": "file **path_to_root_directory**/002_Hello_Input/002_Hello_Input.elf -enable-pretty-printing"* \
-**Only need to modify this line if you are using OS X** \
-Line 36 : *"text": "file **path_to_root_directory**/002_Hello_Input/002_Hello_Input.elf -enable-pretty-printing"* \
+Line 7 : *"proj_name":"002_Hello_Input"* \
+Line 20: *"program": "${workspaceFolder}/002_Hello_Input/002_Hello_Input.elf",*\
 
 **tasks.json**
-Line 06 : *"cwd":"${workspaceFolder}/002_Hello_Input"* \
+Lines 05 - 10 :\
+```JSON
+"options": {
+        "env": {
+          "proj_working_dir": "PWD=002_Hello_Input",
+          "proj_name":"002_Hello_Input"
+        }
+     },
+```
+
  **Only need to modify if you are using PC** \
-Line 54 & 76 : *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/002_Hello_Input/002_Hello_Input.gba;sleep 5;echo debuggerReady"* \
-*line 76 does not need from ";sleep..." onwards.* \
+Line 71: *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/002_Hello_Input/002_Hello_Input.gba;sleep 5;echo debuggerReady"* \
+Line 90: *"command": "**path_to_mGBA**/mGBA-0.6.3-win32/mGBA.exe ${cwd}/$env:proj_name/$env:proj_name.gba"* \
 **Only need to modify if you are using OS X** \
-Line 60 & 81: *"${workspaceFolder}/002_Hello_Input/002_Hello_Input.gba"* \
+Line 74 & 93: *"command": "**path_to_mGBA**/mGBA.app/Contents/MacOS/mGBA",* \
 
 ![Look It Works](./images/screenshot.PNG)
