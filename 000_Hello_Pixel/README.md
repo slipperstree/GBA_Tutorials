@@ -19,12 +19,14 @@ Line 20: *"program": "${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.elf",*\
 
 **tasks.json**
 Lines 05 - 10 :\
-*"options": {\
-        ⋅⋅⋅"env": {\
-        ⋅⋅⋅  "proj_working_dir": "PWD=000_Hello_Pixel",\
-        ⋅⋅⋅  "proj_name":"000_Hello_Pixel"\
-        ⋅⋅⋅}\
-     },*
+```JSON
+"options": {
+        "env": {
+          "proj_working_dir": "PWD=000_Hello_Pixel",
+          "proj_name":"000_Hello_Pixel"\
+        }
+     },
+```
 
  **Only need to modify if you are using PC** \
 Line 71: *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba;sleep 5;echo debuggerReady"* \
