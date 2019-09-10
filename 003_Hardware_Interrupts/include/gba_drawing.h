@@ -4,7 +4,7 @@
 #include "gba_reg.h"
 #include "gba_types.h"
 
-#define SCREENBUFFER ((v_u16*)(VRAM))
+#define SCREENBUFFER ((u16*)(VRAM))
 
 #define SCREEN_W 240
 #define SCREEN_H 160

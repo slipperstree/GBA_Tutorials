@@ -34,7 +34,7 @@ typedef volatile uint32_t		v_u32;	typedef volatile int32_t		v_s32;
 #define VIDEOMODE_3 0x0003
 #define BGMODE_2	0x0400
 
-#define SCREENBUFFER ((v_u16*)(0x06000000))
+#define SCREENBUFFER ((u16*)(0x06000000))
 #define SCREEN_W 240
 #define SCREEN_H 160
 //\===========================================================================================================

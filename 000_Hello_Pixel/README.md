@@ -29,7 +29,7 @@ Lines 05 - 10 :\
 ```
 
  **Only need to modify if you are using PC** \
-Line 71: *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/000_Hello_Pixel/000_Hello_Pixel.gba;sleep 5;echo debuggerReady"* \
+Line 71: *"command": "**path_to_mGBA**/mGBA.exe -g ${workspaceFolder}/$env:proj_name/$env:proj_name.gba;sleep 5;echo debuggerReady"* \
 Line 90: *"command": "**path_to_mGBA**/mGBA-0.6.3-win32/mGBA.exe ${cwd}/$env:proj_name/$env:proj_name.gba"* \
 **Only need to modify if you are using OS X** \
 Line 74 & 93: *"command": "**path_to_mGBA**/mGBA.app/Contents/MacOS/mGBA",* \
