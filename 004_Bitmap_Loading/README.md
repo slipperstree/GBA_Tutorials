@@ -6,8 +6,6 @@ This tutorial content comes from the tutoiral posted up [GBA Bitmap Loading](htt
 
 This program continues the exploration of creating games for the Game boy Advance, this specific tutorial looks at loading bitmap image data into VRAM and displaying it on the screen. This tutorial demonstrates the different pixel modes for the different rendering modes, finally using different rendering modes than the previous tutorials which were limited to mode 3 rendering only.
 
-This tutorial additionally demonstrates page swapping with mode4 rendering mode as this render mode has a front and back buffer that can be drawn to and control of which buffer is drawn to the screen is controlled by the programmer.
-
 To get this project to build and run from the root directory, the following files in the **.vscode** directory will need to be modified. On the following lines:
 
 **.c_cpp_properties.json**\

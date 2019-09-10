@@ -41,7 +41,7 @@ int main()
 				}
 				case VIDEOMODE_4:
 				{
-					memcpy(MEM_TILE, img_gba_m4_bitmap, img_gba_m4BitmapLen);
+					memcpy(SCREENBUFFER, img_gba_m4_bitmap, img_gba_m4BitmapLen);
 					memcpy(MEM_PALETTE, img_gba_m4_pal, img_gba_m4PalLen);
 					break;
 				}
