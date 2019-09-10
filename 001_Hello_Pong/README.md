@@ -21,6 +21,7 @@ Line 20: *"program": "${workspaceFolder}/001_Hello_Pong/001_Hello_Pong.elf",*\
 
 **tasks.json**
 Lines 05 - 10 :\
+
 ```JSON
 "options": {
         "env": {

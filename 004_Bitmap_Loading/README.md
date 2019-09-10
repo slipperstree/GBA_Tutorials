@@ -19,6 +19,7 @@ Line 20: *"program": "${workspaceFolder}/004_Bitmap_Loading/004_Bitmap_Loading.e
 
 **tasks.json**
 Lines 05 - 10 :\
+
 ```JSON
 "options": {
         "env": {

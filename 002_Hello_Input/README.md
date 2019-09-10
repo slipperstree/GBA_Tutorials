@@ -19,6 +19,7 @@ Line 20: *"program": "${workspaceFolder}/002_Hello_Input/002_Hello_Input.elf",*\
 
 **tasks.json**
 Lines 05 - 10 :\
+
 ```JSON
 "options": {
         "env": {

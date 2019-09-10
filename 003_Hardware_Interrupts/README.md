@@ -11,6 +11,7 @@ Line 20: *"program": "${workspaceFolder}/003_Hardware_Interrupts/003_GBA_Hardwar
 
 **tasks.json**
 Lines 05 - 10 :\
+
 ```JSON
 "options": {
         "env": {
