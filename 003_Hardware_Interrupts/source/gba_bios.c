@@ -9,12 +9,6 @@ void vblank_intr_wait()
 
 ARM void interruptHandler()
 {
-	//get the interrupts that we're expecting to be called
-	//u32 ie = REG_IE;
-	//and the expected interrupts with the one being fired
- //   u32 ieif= ie & REG_IF;
-	//This will tell us which interrupt callback function we should call
-	
 	REG_IF = INT_VBLANK;
 	REG_IFBIOS |= INT_VBLANK;
 }

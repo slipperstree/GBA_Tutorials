@@ -45,6 +45,8 @@ typedef void (*fnptr)(void);
 #define DSTAT_VCT_IRQ 0x0020
 
 
+typedef void (*fnptr)(void);
+
 void vblank_intr_wait();
 ARM void interruptHandler();
 void register_vblank_isr();
