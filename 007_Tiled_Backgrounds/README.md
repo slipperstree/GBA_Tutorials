@@ -1,4 +1,4 @@
-# 006_Sprites_Introduction
+# 007_Tiled_Backgrounds
 
 This tutorial content comes from the tutoiral posted up [GBA Bitmap Loading](https://jamiedstewart.github.io/gba%20dev/2019/02/16/GBA-Dev-My-First-Pixels.html) with the supporting YouTube video see here:
 
