@@ -18,27 +18,22 @@ int main()
 
 	register_vblank_isr();
 	//set GBA rendering context to MODE 0 Tile Rendering and enable 1D sprites
-	REG_DISPCNT = VIDEOMODE_0 | ENABLE_OBJECTS | MAPPINGMODE_1D;
-	//copy sprite palette into sprite palette memory
-	memcpy( pal_sp_mem, sp_food_8bPal, sp_food_8bPalLen);
-	//there should be enough sprite tile memory to load all food sprite tiles into memory
-	memcpy(&tile8_mem[4][0], sp_food_8bTiles, sp_food_8bTilesLen);
-
-	//initialise OAM/Sprite object memory
-	oam_init(obj_buffer, 128);
-	
-	//Initialise the first sprite in our object buffer to be the first sprite in our tiles
-	//Set spirte position to be the center of the screen
+	REG_DISPCNT = VIDEOMODE_0 | ENABLE_OBJECTS | MAPPING_MODE_1D;
+	//copy sprite palette into memory
+	memcpy( PAL_SP_MEM, sp_food_8bPal, sp_food_8bPalLen);
+	//There should be enough sprite memory to load all tiles into sprite tile mem
+	memcpy( &TILE8_MEM[4][0], sp_food_8bTiles, sp_food_8bTilesLen);
+	//Initialise the first sprite in our obj_buffer to be the first sprite in out tiles
+	//Set sprite position to be center of the screen
 	s16 x = (SCREEN_W>>1) - 8;
 	s16 y = (SCREEN_H>>1) - 8;
-	//set the tile id
-	u16 tileID = 0;
-
+	//set the tile ID
+	u16 tileID = 0;	
 	//Set the sprite object up
 	SpriteObject* sprite = &obj_buffer[0];
-	sprite->attr0 = SetSpriteObjectAttrib0( y, A0_MODE_REG, 0, 1, A0_8BPP, A0_SQUARE);
-	sprite->attr1 = SetSpriteObjectAttrib1( x, 0, A1_SIZE_1);
-	sprite->attr2 = SetSpriteObjectAttrib2(tileID, 0, 0);
+	sprite->attr0 = SetSpriteObjectAttrib0( y, A0_MODE_REG, A0_GFX_MODE_REG, 0, 1, A0_SHAPE_SQUARE);
+	sprite->attr1 = SetSpriteObjectAttrib1( x, 0, 1);
+	sprite->attr2 = SetSpriteObjectAttrib2( tileID, A2_PRIORITY_0, 0);
 
 	while (1) { //loop forever
 		vblank_intr_wait();
@@ -49,7 +44,7 @@ int main()
 			tileID += 4<<1;
 			tileID = tileID & 0x1FF;
 		}
-		sprite->attr2 = SetSpriteObjectAttrib2(tileID, 0, 0);
+		sprite->attr2 = SetSpriteObjectAttrib2( tileID, A2_PRIORITY_0, 0);
 		oam_copy(MEM_OAM, obj_buffer, 1);
 	}
 	return 0;

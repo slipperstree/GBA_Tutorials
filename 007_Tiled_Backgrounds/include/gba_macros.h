@@ -18,6 +18,8 @@ typedef unsigned long __PTRDIFF_TYPE__;
 #define ARM __attribute__((__target__("arm")))
 #define THUMB __attribute__((__target__("thumb")))
 
+#define PACKED(n) __attribute__((packed, aligned(n)))
+
 #ifndef	NULL
 #define	NULL	(void*)0
 #endif
