@@ -94,16 +94,16 @@ extern SpriteObject obj_buffer[128];
 */
 #define A0_MODE_MASK          0x0300
 #define A0_MODE_REG           0x0
-#define A0_MODE_AFFINE        0x100
-#define A0_MODE_DISABLE       0x200
-#define A0_MODE_AFF_DBL       0x300
+#define A0_MODE_AFFINE        0x1
+#define A0_MODE_DISABLE       0x2
+#define A0_MODE_AFF_DBL       0x3
 #define A0_MODE_SHIFT         8
 #define A0_MODE(n)            ((n << A0_MODE_SHIFT) & A0_MODE_MASK)
 /*  10-11 OBJ Mode  (0=Normal, 1=Semi-Transparent, 2=OBJ Window, 3=Prohibited)*/
 #define A0_GFX_MODE_MASK      0x0C00
 #define A0_GFX_MODE_REG       0x0
-#define A0_GFX_MODE_BLEND     0x400
-#define A0_GFX_MODE_WINDOW    0x800
+#define A0_GFX_MODE_BLEND     0x1
+#define A0_GFX_MODE_WINDOW    0x2
 #define A0_GFX_MODE_SHIFT     10
 #define A0_GFX_MODE(n)        ((n << A0_GFX_MODE_SHIFT) & A0_GFX_MODE_MASK)
 /*  12    OBJ Mosaic             (0=Off, 1=On)*/
@@ -113,14 +113,14 @@ extern SpriteObject obj_buffer[128];
 /*  13    Colors/Palettes        (0=16/16, 1=256/1)*/
 #define A0_COLOUR_MODE_MASK   0x2000
 #define A0_COLOUR_MODE_4BPP   0x0
-#define A0_COLOUR_MODE_8BPP   0x2000
+#define A0_COLOUR_MODE_8BPP   0x1
 #define A0_COLOUR_MODE_SHIFT  13
 #define A0_COLOUR_MODE(n)     ((n << A0_COLOUR_MODE_SHIFT) & A0_COLOUR_MODE_MASK)
 /*  14-15 OBJ Shape              (0=Square,1=Horizontal,2=Vertical,3=Prohibited)*/
 #define A0_SHAPE_MASK         0xC000
 #define A0_SHAPE_SQUARE       0x0
-#define A0_SHAPE_WIDE         0x4000
-#define A0_SHAPE_TALL         0x8000
+#define A0_SHAPE_WIDE         0x1
+#define A0_SHAPE_TALL         0x2
 #define A0_SHAPE_SHIFT        14
 #define A0_SHAPE(n)           ((n << A0_SHAPE_SHIFT) & A0_SHAPE_MASK)  
 
@@ -139,9 +139,9 @@ OBJ Attribute 1 (R/W)
     13    Vertical Flip        (0=Normal, 1=Mirrored)*/
 #define A1_AFFINE_INDEX_MASK    0x3E00
 #define A1_FLIP_MASK            0x3000
-#define A1_H_FLIP               0x1000
-#define A1_V_FLIP               0x2000
-#define A1_FLIP_SHIFT           9
+#define A1_H_FLIP               0x1
+#define A1_V_FLIP               0x2
+#define A1_FLIP_SHIFT           12
 #define A1_FLIP(n)              ((n << A1_FLIP_SHIFT) & A1_FLIP_MASK)
 /*  14-15 OBJ Size               (0..3, depends on OBJ Shape, see Attr 0)
           Size  Square   Horizontal  Vertical
@@ -152,9 +152,9 @@ OBJ Attribute 1 (R/W)
 */
 #define A1_SIZE_MASK            0xC000
 #define A1_SIZE_0               0x0
-#define A1_SIZE_1               0x4000
-#define A1_SIZE_2               0x8000
-#define A1_SIZE_3               0xC000
+#define A1_SIZE_1               0x1
+#define A1_SIZE_2               0x2
+#define A1_SIZE_3               0x3
 #define A1_SIZE_SHIFT           14
 #define A1_SIZE(n)              ((n << A1_SIZE_SHIFT) & A1_SIZE_MASK)
 /*
@@ -167,9 +167,9 @@ OBJ Attribute 2 (R/W)
 /*  10-11 Priority relative to BG (0-3; 0=Highest)*/
 #define A2_PRIORITY_MASK        0xC00
 #define A2_PRIORITY_0           0x0
-#define A2_PRIORITY_1           0x400
-#define A2_PRIORITY_2           0x800
-#define A2_PRIORITY_3           0xC00
+#define A2_PRIORITY_1           0x1
+#define A2_PRIORITY_2           0x2
+#define A2_PRIORITY_3           0x3
 #define A2_PRIORITY_SHIFT       10
 #define A2_PRIORITY(n)          ((n << A2_PRIORITY_SHIFT) & A2_PRIORITY_MASK)
 /*  12-15 Palette Number   (0-15) (Not used in 256 color/1 palette mode)*/

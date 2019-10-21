@@ -31,8 +31,8 @@ int main()
 	u16 tileID = 0;	
 	//Set the sprite object up
 	SpriteObject* sprite = &obj_buffer[0];
-	sprite->attr0 = SetSpriteObjectAttrib0( y, A0_MODE_REG, A0_GFX_MODE_REG, 0, 1, A0_SHAPE_SQUARE);
-	sprite->attr1 = SetSpriteObjectAttrib1( x, 0, 1);
+	sprite->attr0 = SetSpriteObjectAttrib0( y, A0_MODE_REG, A0_GFX_MODE_REG, 0, A0_COLOUR_MODE_8BPP, A0_SHAPE_SQUARE);
+	sprite->attr1 = SetSpriteObjectAttrib1( x, 0, A1_SIZE_1);
 	sprite->attr2 = SetSpriteObjectAttrib2( tileID, A2_PRIORITY_0, 0);
 
 	while (1) { //loop forever
