@@ -25,7 +25,7 @@ TARGET		:= $(PWD)
 BUILD		:= $(PWD)/build
 SOURCES		:= asm source resources
 INCLUDES	:= include resources
-DATA		:= data
+DATA		:= data img
 MUSIC		:=
 
 #---------------------------------------------------------------------------------
