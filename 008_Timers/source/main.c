@@ -2,6 +2,7 @@
 #include "gba_types.h"
 #include "gba_bios.h"
 #include "gba_gfx.h"
+#include "gba_timers.h"
 #include "gba_drawing.h"
 #include "gba_mathUtil.h"
 #include "gba_input.h"
@@ -47,8 +48,6 @@ void copy64x32MapIntoMemory( const u16* a_mapData, u16 a_mapBlockAddress )
 	}
 }
 
-u32 loopCounter = 0;
-
 int main()
 {
 
@@ -69,14 +68,26 @@ int main()
 	REG_BGCNT[0] = setBGControlRegister( 1, 0, 0, 0, 16, 0, BG_REG_SIZE_64x32);
 	REG_BGCNT[1] = setBGControlRegister( 0, 0, 0, 0, 18, 0, BG_REG_SIZE_64x32);
 
+	InitialiseTimer( 2, TIMER_PRESCALE_64, TIMER_NORMAL, TIMER_IRQ_DISABLE, TIMER_DISABLE, -0x1000 );
+	InitialiseTimer( 3, TIMER_PRESCALE_1, TIMER_CASCADE, TIMER_IRQ_DISABLE, TIMER_ENABLE, 0);
+	StartTimer(2);
+
+	u16 currentTime = 0;
+	u16 prevTime = vblank_Counter;
+	s16 frames = 0;
 	s32 x = 0;
 	s32 y = 0;
 	while (1) { //loop forever
 		vblank_intr_wait();
 		PollKeys();
-		s32 countVal = vblank_Counter;
-		loopCounter++;
-		x += getAxis(HORIZONTAL);
+		if( keyHit(START) )
+		{
+			TimerToggleCascade(2);
+		}
+
+		prevTime = currentTime;
+		currentTime = vblank_Counter;
+		x += currentTime - prevTime;
 		y -= getAxis(VERTICAL);
 		REG_BG_OFFSET[0].x = x;
 		REG_BG_OFFSET[0].y = y;
