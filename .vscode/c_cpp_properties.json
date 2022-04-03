@@ -1,6 +1,6 @@
 {
     "env": {
-        "proj_name":"000_Hello_Pixel"
+        "proj_name":"101_Snake"
     },
     "configurations": [
         {
