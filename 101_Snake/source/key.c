@@ -107,7 +107,7 @@ void keyScanCommon(u8 btnUpDown, pBtnEventFunc callBackFunc, u8 btnIdx){
     
     // 按键按下 且 之前为松开状态：【按键刚刚被按下】
     if (btnUpDown == KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_CLICK_START){
-        delay_ms(XIAO_DOU);
+        //TODO:GBA? delay_ms(XIAO_DOU);
         if (btnUpDown == KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_CLICK_START){
             #ifdef USE_KEY_DOWN_UP
                 // 响应按下事件
@@ -152,7 +152,7 @@ void keyScanCommon(u8 btnUpDown, pBtnEventFunc callBackFunc, u8 btnIdx){
 
     // 按键放开 且 为等待按住不放完成状态：【长时间按住按键后刚刚松开】
     else if (btnUpDown != KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_KEEP_PRESS_END){
-        delay_ms(XIAO_DOU);
+        //TODO:GBA? delay_ms(XIAO_DOU);
         if (btnUpDown != KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_KEEP_PRESS_END){
             // 什么也不做，回到初始状态（当然，这里也可以搞一个【长时间按下后放开的事件】或者叫【长时间单击事件】,目前没有必要）
             btnStatus[btnIdx] = STS_WAIT_CLICK_START;
@@ -161,7 +161,7 @@ void keyScanCommon(u8 btnUpDown, pBtnEventFunc callBackFunc, u8 btnIdx){
 
     // 按键放开 且 为等待单击完成状态：【按键刚刚松开】
     else if (btnUpDown != KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_CLICK_END){
-        delay_ms(XIAO_DOU);
+        //TODO:GBA? delay_ms(XIAO_DOU);
         if (btnUpDown != KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_CLICK_END){
             
             #ifdef __UART_H_
@@ -208,7 +208,7 @@ void keyScanCommon(u8 btnUpDown, pBtnEventFunc callBackFunc, u8 btnIdx){
         #ifndef NOT_USE_DBCLICK
             // 按键按下 且 等待双击事件开始状态：【单击结束后并在一定时间内再次按下】
             else if (btnUpDown == KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_DBCLICK_START){
-                delay_ms(XIAO_DOU);
+                //TODO:GBA? delay_ms(XIAO_DOU);
                 if (btnUpDown == KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_DBCLICK_START){
                     // 进入等待双击完成状态
                     ttWaitKeyDBClickEnd[btnIdx] = 0;
@@ -224,7 +224,7 @@ void keyScanCommon(u8 btnUpDown, pBtnEventFunc callBackFunc, u8 btnIdx){
 
             // 按键松开 且 为等待双击完成状态：【双击的第二次按键刚刚松开】
             else if (btnUpDown != KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_DBCLICK_END){
-                delay_ms(XIAO_DOU);
+                //TODO:GBA? delay_ms(XIAO_DOU);
                 if (btnUpDown != KEY_DOWN && btnStatus[btnIdx] == STS_WAIT_DBCLICK_END){
                     
                     // 如果第二次按键按下并松开的时间间隔已经超过了一次有效单击要求的最大间隔，视为无效双击操作，丢弃，重新等待

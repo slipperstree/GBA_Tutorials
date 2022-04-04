@@ -6,6 +6,14 @@ u16 setColor(u8 a_red, u8 a_green, u8 a_blue)
 	return (a_red & 0x1F) | (a_green & 0x1F) << 5 | (a_blue & 0x1f) << 10;
 }
 
+void drawPoint(u32 x, u32 y, u16 color)
+{
+	if (x < SCREEN_W && y < SCREEN_H)
+	{
+		SCREENBUFFER[y * SCREEN_W + x] = color;
+	}
+}
+
 void drawRect(u32 a_left, u32 a_top, u32 a_width, u32 a_height, u16 a_color)
 {
 	for (u32 y = 0; y < a_height; ++y)
@@ -18,6 +26,11 @@ void drawRect(u32 a_left, u32 a_top, u32 a_width, u32 a_height, u16 a_color)
 }
 
 void drawLine(s32 a_x, s32 a_y, s32 a_x2, s32 a_y2, u16 a_color)
+{
+	drawLineWidth(a_x, a_y, a_x2, a_y2, 1, a_color);
+}
+
+void drawLineWidth(s32 a_x, s32 a_y, s32 a_x2, s32 a_y2, u16 a_width, u16 a_color)
 {
 	s32 w = a_x2 - a_x;
 	s32 h = a_y2 - a_y;
@@ -35,7 +48,11 @@ void drawLine(s32 a_x, s32 a_y, s32 a_x2, s32 a_y2, u16 a_color)
 	}
 	s32 numerator = longest >> 1;
 	for (s32 i = 0; i <= longest; i++) {
-		SCREENBUFFER[a_y * SCREEN_W + a_x] = a_color;
+		// Line Width £¨dummy£©
+		for ( u16 j = 0; j < a_width; j++ ) {
+			SCREENBUFFER[a_y * SCREEN_W + a_x + j] = a_color;
+		}
+		//SCREENBUFFER[a_y * SCREEN_W + a_x] = a_color;
 		numerator += shortest;
 		if (!(numerator<longest)) {
 			numerator -= longest;

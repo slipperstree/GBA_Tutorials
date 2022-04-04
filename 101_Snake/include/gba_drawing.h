@@ -11,6 +11,9 @@
 
 extern u16 setColor(u8 a_red, u8 a_green, u8 a_blue);
 extern void drawRect(u32 a_left, u32 a_top, u32 a_width, u32 a_height, u16 a_color);
+extern void drawLineWidth(s32 a_x, s32 a_y, s32 a_x2, s32 a_y2, u16 a_width, u16 a_color);
 extern void drawLine(s32 a_x, s32 a_y, s32 a_x2, s32 a_y2, u16 a_color);
+extern void drawPoint(u32 x, u32 y, u16 color);
+
 
 #endif //__GBA_DRAWING_H__

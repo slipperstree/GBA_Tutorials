@@ -8,9 +8,17 @@
 
 #include "embSnakeDevice.h"
 #include "boradSupport.h"
+#include "gba_drawing.h"
 
 // 临时变量用(sprintf等)
 extern u8 buff[128];
+
+u16 drawAreaStartX = 0;
+u16 drawAreaStartY = 0;
+u16 drawAreaEndX = 0;
+u16 drawAreaEndY = 0;
+u16 drawAreaCurrX = 0;
+u16 drawAreaCurrY = 0;
 
 // =========================================================================================
 // ==    显示设备相关    =====================================================================
@@ -21,14 +29,14 @@ extern u8 buff[128];
 void devDisplayInit(u16 bgColor){
     //TODO:GBA? LCD_Init();
     devScreenOFF(); // 关闭LCD显示
-    LCD_Clear(bgColor);
+    //TODO:GBA? LCD_Clear(bgColor);
     devScreenON();  // 打开LCD显示
     //TODO:GBA? TFT_BL = 0;     // 打开液晶屏背光灯
 }
 
 // 填充一个矩形区域
 void devFillRectange(u16 x, u16 y, u16 width, u16 height, u16 color){
-    //TODO:GBA? LCD_Fill(x, y, x+width-1, y+height-1, color);
+    drawRect(x, y, width, height, color);
 }
 
 // 为绘制一个区域做准备。（外部调用了这个函数后会批量调用devPointInDrawArea来绘制各种图案或点阵文字）
@@ -36,18 +44,34 @@ void devFillRectange(u16 x, u16 y, u16 width, u16 height, u16 color){
 // LCD_SetArea(startX, startY, startX+areaWidth-1, startY+areaHeight-1);
 // LCD_WR_REG(0x2C);
 void devPrepareForDrawArea(u16 startX, u16 startY, u16 areaWidth, u16 areaHeight){
-    //TODO:GBA? LCD_SetArea(startX, startY, startX+areaWidth-1, startY+areaHeight-1);
-	//TODO:GBA? LCD_WR_REG(0x2C);
+    drawAreaStartX = startX;
+    drawAreaStartY = startY;
+    drawAreaEndX = startX+areaWidth-1;
+    drawAreaEndY = startY+areaHeight-1;
+    drawAreaCurrX = drawAreaStartX;
+    drawAreaCurrY = drawAreaStartY;
 }
 
 // 绘制一个指定颜色的点，无需考虑坐标位置。（外部会先调用函数devPrepareForDrawArea以确定绘图范围）
 void devPointInDrawArea(u16 color){
-    //TODO:GBA? LcdWirteColorData(color);
+    if (drawAreaCurrX>drawAreaEndX) {
+        drawAreaCurrX=drawAreaStartX;
+        drawAreaCurrY++;
+    }
+
+    // 已经超出指定绘图范围，不绘制
+    if (drawAreaCurrY>drawAreaEndY) return;
+
+    // 在当前位置绘制一个点
+    drawPoint(drawAreaCurrX, drawAreaCurrY, color);
+
+    drawAreaCurrX++;
 }
 
 // 绘制直线
 void devDrawLine(u16 x1, u16 y1, u16 x2, u16 y2, u16 width, u16 color){
-    //TODO:GBA? LCD_DrawLine_Color(x1, y1, x2, y2, width, color);
+    //TODO: 线宽没有实现
+    drawLineWidth(x1, y1, x2, y2, width, color);
 }
 
 // 关闭屏幕显示(跟函数devScreenON搭配使用，如无必要可不用实现留空即可，实现了更好，可以防止刷新画面的过程被用户看见)

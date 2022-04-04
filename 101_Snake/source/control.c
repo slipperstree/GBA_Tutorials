@@ -61,10 +61,10 @@ extern u8 buff[128];
 void CTL_run(){
 	u16 flashSpeed=0;
 
-    KEY_keyscan();
+    //TODO:GBA? KEY_keyscan();
     
-    // ttWalk++;
-    // ttFlag++;
+    ttWalk++;
+    ttFlag++;
 
     #if ISDEBUG
     devShowString(0,0, "D", &FONT32, COLOR_BLACK, COLOR_YELLOW);
@@ -395,7 +395,7 @@ void eventSnake(){
         if (nowMode == MODE_GAME)
         {
             //先停一会死掉的状态
-            Pre_Delay_ms(1000);
+            //TODO:GBA? Pre_Delay_ms(1000);
 
             devEnterGameOverPage();
 
@@ -430,7 +430,7 @@ void eventSnake(){
 
             #if !(ISDEBUG && DEBUG_DEMO_GAMEOVER_NOWAIT)
                 // 停一会
-                Pre_Delay_ms(3000);
+                //TODO:GBA? Pre_Delay_ms(3000);
             #endif
             
             // 回到欢迎页
