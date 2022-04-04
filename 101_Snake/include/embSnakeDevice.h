@@ -98,8 +98,10 @@
 // *******************************************************************************************************
 
     // 屏幕分辨率
-    #define SCREEN_W  320
-    #define SCREEN_H  240
+    //#define SCREEN_W  320
+    //#define SCREEN_H  240
+    #define SCREEN_W  240
+    #define SCREEN_H  160
 
     // 元素颜色设置
     // 默认背景/前景（程序中可通过 DISP_setBackColor/DISP_setForeColor 随时修改）
@@ -109,7 +111,7 @@
     #define COLOR_TITLE1            COLOR_SKYLT
     #define COLOR_TITLE2            COLOR_GREENLT
     // 蛇/食物
-    #define COLOR_DEFAULT_SNAKE     0xa50c
+    #define COLOR_DEFAULT_SNAKE     0x3234
     #define COLOR_DEFAULT_APPLE     COLOR_YELLOW
     // 游戏界面框架颜色
     #define COLOR_DEFAULT_FRAME     COLOR_DEFAULT_FRONT

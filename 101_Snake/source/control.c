@@ -543,25 +543,25 @@ void resetDemoWall(){
     SNAKE_clearWall();
 
     //「演示模式」所在区域设置为障碍物
-    SNAKE_addWall(10, 4);
-    SNAKE_addWall(11, 4);
-    SNAKE_addWall(10, 5);
-    SNAKE_addWall(11, 5);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_1_X,   SNAKE_DEMO_TITLE_1_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_1_X+1, SNAKE_DEMO_TITLE_1_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_1_X,   SNAKE_DEMO_TITLE_1_Y+1);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_1_X+1, SNAKE_DEMO_TITLE_1_Y+1);
 
-    SNAKE_addWall(14, 4);
-    SNAKE_addWall(15, 4);
-    SNAKE_addWall(14, 5);
-    SNAKE_addWall(15, 5);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_2_X,   SNAKE_DEMO_TITLE_2_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_2_X+1, SNAKE_DEMO_TITLE_2_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_2_X,   SNAKE_DEMO_TITLE_2_Y+1);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_2_X+1, SNAKE_DEMO_TITLE_2_Y+1);
 
-    SNAKE_addWall(10, 8);
-    SNAKE_addWall(11, 8);
-    SNAKE_addWall(10, 9);
-    SNAKE_addWall(11, 9);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_3_X,   SNAKE_DEMO_TITLE_3_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_3_X+1, SNAKE_DEMO_TITLE_3_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_3_X,   SNAKE_DEMO_TITLE_3_Y+1);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_3_X+1, SNAKE_DEMO_TITLE_3_Y+1);
 
-    SNAKE_addWall(14, 8);
-    SNAKE_addWall(15, 8);
-    SNAKE_addWall(14, 9);
-    SNAKE_addWall(15, 9);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_4_X,   SNAKE_DEMO_TITLE_4_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_4_X+1, SNAKE_DEMO_TITLE_4_Y);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_4_X,   SNAKE_DEMO_TITLE_4_Y+1);
+    SNAKE_addWall(SNAKE_DEMO_TITLE_4_X+1, SNAKE_DEMO_TITLE_4_Y+1);
 }
 
 void CTL_init() {

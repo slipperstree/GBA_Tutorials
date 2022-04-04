@@ -26,7 +26,7 @@ u8* STR_GAMEOVER_SCORE_EN            = (u8*)"Score:";
 u8 frameThickness=1;
 
 // 游戏区域左上角坐标Y偏移(也就是框架厚度)
-u16 GAME_AREA_X_OFFSET=1;
+u16 GAME_AREA_X_OFFSET=2;
 
 // 游戏区域左上角坐标Y偏移（drawFrame中计算并设置）(去掉顶部框架和顶部信息区域以及上方横栏高度(也就是框架厚度))
 u16 GAME_AREA_Y_OFFSET=0;
@@ -102,7 +102,7 @@ u16 randRGB565(){
         }
         break;
     }
-    return RGB888toRGB565(r, g, b);
+    return RGB888toRGB555(r, g, b);
 }
 
 void clearScreen(void){
@@ -476,7 +476,7 @@ void DISP_drawWelcome(u8 isStartUp){
             while(1){
                 r+=1;
                 if (r>=256) break;
-                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toRGB565(r, 0, 0), COLOR_BG);
+                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toRGB555(r, 0, 0), COLOR_BG);
             }
             // 出现后等待一会儿
             //TODO:GBA? Pre_Delay_ms(1000);
@@ -486,7 +486,7 @@ void DISP_drawWelcome(u8 isStartUp){
             while(r<255){
                 r+=5;
                 if (r>=256) r = 255;
-                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toRGB565(r, 0, 0), COLOR_BG);
+                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toRGB555(r, 0, 0), COLOR_BG);
             }
             // 出现后等待一会儿
             //TODO:GBA? Pre_Delay_ms(500);
@@ -548,17 +548,25 @@ void DISP_drawDemo(u8 soundOnOff){
     showChar(frameThickness + 10, topInfoY+3, FONT_SNAKE_BLOCK_APPLE, &BLOCK_VIEW_FONT, COLOR_BG, COLOR_FO);
     devShowString(frameThickness + 10 + BLOCK_VIEW_FONT.fontWidth, topInfoY, " =  0", &FONT20, COLOR_BG, COLOR_FO);
     // 居右显示文字
-    devShowString(SCREEN_W - frameThickness - calcStringWidth("By C.Ling 2021.7", &FONT20) - 5, topInfoY, "By C.Ling 2021.7", &FONT20, COLOR_BG, COLOR_FO);
+    devShowString(SCREEN_W - frameThickness - calcStringWidth("C.Ling 2022.3", &FONT20) - 5, topInfoY, "C.Ling 2022.3", &FONT20, COLOR_BG, COLOR_FO);
 
     // 游戏区域中央显示 演示模式 （显示区域需要设置为障碍物不让蛇通过）
     #ifdef UI_LANG_EN
         showStringCenter(SCREEN_H - FONT32.fontHeight - frameThickness - 1, STR_DEMO_MODE_EN, &FONT8, flashOnOff);
     #endif
     #ifdef UI_LANG_CN
-        showChar(120+GAME_AREA_X_OFFSET, 48+GAME_AREA_Y_OFFSET, FONT_HZ_DEMO_MODE_YAN, &FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_R, COLOR_BG );
-        showChar(168+GAME_AREA_X_OFFSET, 48+GAME_AREA_Y_OFFSET, FONT_HZ_DEMO_MODE_SHI1,&FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_G, COLOR_BG );
-        showChar(120+GAME_AREA_X_OFFSET, 96+GAME_AREA_Y_OFFSET, FONT_HZ_DEMO_MODE_MO,  &FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_B, COLOR_BG );
-        showChar(168+GAME_AREA_X_OFFSET, 96+GAME_AREA_Y_OFFSET, FONT_HZ_DEMO_MODE_SHI2,&FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_Y, COLOR_BG );
+        showChar(SNAKE_DEMO_TITLE_1_X * 12  + GAME_AREA_X_OFFSET, 
+                 SNAKE_DEMO_TITLE_1_Y * 12 + GAME_AREA_Y_OFFSET, 
+                 FONT_HZ_DEMO_MODE_YAN, &FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_R, COLOR_BG );
+        showChar(SNAKE_DEMO_TITLE_2_X * 12  + GAME_AREA_X_OFFSET, 
+                 SNAKE_DEMO_TITLE_2_Y * 12 + GAME_AREA_Y_OFFSET, 
+                 FONT_HZ_DEMO_MODE_SHI1,&FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_G, COLOR_BG );
+        showChar(SNAKE_DEMO_TITLE_3_X * 12  + GAME_AREA_X_OFFSET, 
+                 SNAKE_DEMO_TITLE_3_Y * 12 + GAME_AREA_Y_OFFSET, 
+                 FONT_HZ_DEMO_MODE_MO,  &FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_B, COLOR_BG );
+        showChar(SNAKE_DEMO_TITLE_4_X * 12  + GAME_AREA_X_OFFSET, 
+                 SNAKE_DEMO_TITLE_4_Y * 12 + GAME_AREA_Y_OFFSET, 
+                 FONT_HZ_DEMO_MODE_SHI2,&FONTHZ_DEMO_MOEDE24, COLOR_WINLOGO_Y, COLOR_BG );
     #endif
 
     // 底部信息
@@ -741,7 +749,7 @@ void DISP_drawFrame() {
 
     // 游戏区域Y偏移
     GAME_AREA_Y_OFFSET = barTopY + frameThickness;
-    GAME_AREA_X_OFFSET = frameThickness;
+    GAME_AREA_X_OFFSET = frameThickness + 3;
 }
 
 // 声音和静音状态

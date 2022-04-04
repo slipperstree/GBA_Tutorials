@@ -16,8 +16,20 @@
 // ### 贪食蛇模块 定义 根据需要修改以下定义 ##################################################################
 
 // 地图大小(非屏幕分辨率)
-#define SNAKE_SIZE_X  26
-#define SNAKE_SIZE_Y  14
+// #define SNAKE_SIZE_X  26
+// #define SNAKE_SIZE_Y  14
+#define SNAKE_SIZE_X  19
+#define SNAKE_SIZE_Y  7
+
+// 演示模式文字显示位置
+#define SNAKE_DEMO_TITLE_1_X  6
+#define SNAKE_DEMO_TITLE_1_Y  1
+#define SNAKE_DEMO_TITLE_2_X  12
+#define SNAKE_DEMO_TITLE_2_Y  1
+#define SNAKE_DEMO_TITLE_3_X  6
+#define SNAKE_DEMO_TITLE_3_Y  4
+#define SNAKE_DEMO_TITLE_4_X  12
+#define SNAKE_DEMO_TITLE_4_Y  4
 
 // 是否使用外部的真随机函数，如果放开这个宏定义表示使用外部的真随机函数，那么需要在外部c文件中实现下列函数。(实现例见common.c)
 // 外部需要实现的函数: u16 My_real_rand()

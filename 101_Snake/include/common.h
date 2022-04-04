@@ -5,6 +5,7 @@
 #include "binary.h"
 #include "font.h"
 #include "color.h"
+#include "gba_mathUtil.h"
 
 void My_delay_ms(u16 n);
 u8 My_strlen(char* x);

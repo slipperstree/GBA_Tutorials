@@ -17,13 +17,13 @@ int main()
 	//set GBA rendering context to MODE 3 Bitmap Rendering
 	REG_DISPCNT = VIDEOMODE_3 | BGMODE_2;
 
-	register_vblank_isr();
+	// register_vblank_isr();
 
 	gba_seed_rand(14);
-	Paddle p1;
-	InitPaddle(&p1,10, 60, 8, 40, setColor(0, 0, 31));
-	Paddle p2;
-	InitPaddle(&p2, SCREEN_W - 18, 60, 8, 40, setColor(31, 0, 0));
+	// Paddle p1;
+	// InitPaddle(&p1,10, 60, 8, 40, setColor(0, 0, 31));
+	// Paddle p2;
+	// InitPaddle(&p2, SCREEN_W - 18, 60, 8, 40, setColor(31, 0, 0));
 
 	// Ball ball;
 	// InitBall(&ball, 115, 75, 10, setColor(31, 31, 31));
