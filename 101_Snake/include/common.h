@@ -36,10 +36,10 @@ u16 My_real_rand();
     #define SPEED_DEFAULT    800      //初始速度
     #define SPEED_MAX        100      //最高速度
     #define SPEED_INTERVAL    50      //每个等级速度相差的数值
-    #define SPEED_DEMO_L     200      //DEMO速度慢(初始)
-    #define SPEED_DEMO_M     100      //DEMO速度中
-    #define SPEED_DEMO_H      50      //DEMO速度快
-    #define SPEED_DEMO_S       5      //DEMO速度超快
+    #define SPEED_DEMO_L     800      //DEMO速度慢(初始)
+    #define SPEED_DEMO_M     500      //DEMO速度中
+    #define SPEED_DEMO_H     200      //DEMO速度快
+    #define SPEED_DEMO_S     100      //DEMO速度超快
 #endif
 
 // LOG输出设置，单独设置，与ISDEBUG无关 =============================================

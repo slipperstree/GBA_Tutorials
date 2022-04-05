@@ -63,6 +63,7 @@ void CTL_run(){
 
     //TODO:GBA? KEY_keyscan();
     
+    // TODO:GBA? 本来是在定时器中断里面做的，GBA定时器中断有吗？
     ttWalk++;
     ttFlag++;
 
@@ -72,9 +73,9 @@ void CTL_run(){
     
     if (nowMode == MODE_WELCOME_DEMO)
     {
-        flashSpeed = 500;
+        flashSpeed = 30000;
     } else {
-        flashSpeed = 500;
+        flashSpeed = 30000;
     }
 
     if (ttFlag > flashSpeed)
@@ -395,7 +396,7 @@ void eventSnake(){
         if (nowMode == MODE_GAME)
         {
             //先停一会死掉的状态
-            //TODO:GBA? Pre_Delay_ms(1000);
+            My_delay_ms(1000);
 
             devEnterGameOverPage();
 
@@ -430,7 +431,7 @@ void eventSnake(){
 
             #if !(ISDEBUG && DEBUG_DEMO_GAMEOVER_NOWAIT)
                 // 停一会
-                //TODO:GBA? Pre_Delay_ms(3000);
+                My_delay_ms(3000);
             #endif
             
             // 回到欢迎页

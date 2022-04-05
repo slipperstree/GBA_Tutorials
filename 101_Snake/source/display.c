@@ -48,7 +48,7 @@ void clearScreen(void);     // 清屏
 Font_Type* showChar(u16 x, u16 y, u8 *chr, Font_Type *font, u16 colorBg, u16 colorFont);
 
 // 获取随机颜色
-u16 randRGB565(){
+u16 randBGR565(){
     u8 r=0, g=0, b=0;
 
     r = My_real_rand() % 10;
@@ -471,25 +471,25 @@ void DISP_drawWelcome(u8 isStartUp){
         logoY = titleY + FONTHZ_TITLE64.fontHeight + FONTHZ_XD_LOGO40.fontHeight / 2;
         if (isStartUp)
         {
-            //TODO:GBA? Pre_Delay_ms(1000);
+            My_delay_ms(1000);
             // 学电LOGO缓缓出现的动画效果
             while(1){
-                r+=1;
+                r+=5;
                 if (r>=256) break;
                 showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toBGR555(r, 0, 0), COLOR_BG);
             }
             // 出现后等待一会儿
-            //TODO:GBA? Pre_Delay_ms(1000);
+            My_delay_ms(1000);
         } else {
             // 非上电画面，快速显示
             // 学电LOGO缓缓出现的动画效果
             while(r<255){
-                r+=5;
+                r+=10;
                 if (r>=256) r = 255;
                 showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toBGR555(r, 0, 0), COLOR_BG);
             }
             // 出现后等待一会儿
-            //TODO:GBA? Pre_Delay_ms(500);
+            My_delay_ms(500);
         }
     #endif
 }
@@ -514,15 +514,15 @@ void DISP_flashWelcome(u8 flashOnOff){
         // 学电LOGO变幻颜色
         logoX = (SCREEN_W - FONTHZ_XD_LOGO40.fontWidth) / 2;
         logoY = SCREEN_H/6 + FONTHZ_TITLE64.fontHeight + FONTHZ_XD_LOGO40.fontHeight / 2;
-        showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, randRGB565(), COLOR_BG);
+        showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, randBGR565(), COLOR_BG);
 
         // 闪烁文字
         showStringCenter(logoY + FONTHZ_XD_LOGO40.fontHeight + FONTHZ_XD_LOGO40.fontHeight / 2, STR_PRESS_ANY_KEY_CN, &FONTHZ32, flashOnOff);
 
         // 标题 贪吃蛇 变幻颜色
-        // showChar(10, 20, "贪", &FONTHZ_TITLE64, COLOR_BG, randRGB565());
-        // showChar(50, 20, "吃", &FONTHZ_TITLE64, COLOR_BG, randRGB565());
-        // showChar(90, 20, "蛇", &FONTHZ_TITLE64, COLOR_BG, randRGB565());
+        // showChar(10, 20, "贪", &FONTHZ_TITLE64, COLOR_BG, randBGR565());
+        // showChar(50, 20, "吃", &FONTHZ_TITLE64, COLOR_BG, randBGR565());
+        // showChar(90, 20, "蛇", &FONTHZ_TITLE64, COLOR_BG, randBGR565());
     #endif
 }
 
@@ -717,7 +717,7 @@ void DISP_flashGameOver(u8 flashOnOff, u8 isNewRecord){
         if (isNewRecord)
         {
             // 刷新记录动态效果
-            showStringCenterColor(35, STR_GAMEOVER_NEWRECORD_CN, &FONTHZ32, COLOR_BG, randRGB565(), 0);
+            showStringCenterColor(35, STR_GAMEOVER_NEWRECORD_CN, &FONTHZ32, COLOR_BG, randBGR565(), 0);
         }
 
         // 底部闪烁文字 按任意键继续...

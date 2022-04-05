@@ -9,6 +9,7 @@ u8 buff[128]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 // #pragma optimize=none 是给IAR看的，避免被编译器优化掉导致延时被跳过。
 // 不使用iar环境时可能需要删掉或者改成keil支持的语法
 //#pragma optimize=none
+#pragma GCC optimize(0)
 void My_delay_ms(u16 n)
 {
 	u16 x,y;
