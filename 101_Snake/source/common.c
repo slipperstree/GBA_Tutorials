@@ -15,7 +15,7 @@ void My_delay_ms(u16 n)
 	u16 x,y;
 	for(x=n;x>0;x--)
 	{
-		for(y=110;y>0;y--);
+		for(y=270;y>0;y--);
 	}
 }
 

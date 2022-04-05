@@ -6,6 +6,8 @@
 #include "font.h"
 #include "color.h"
 #include "gba_mathUtil.h"
+#include "gba_input.h"
+#include "gba_bios.h"
 
 void My_delay_ms(u16 n);
 u8 My_strlen(char* x);
@@ -33,8 +35,8 @@ u16 My_real_rand();
     #define SPEED_DEMO_H    DEBUG_DEMO_SPEED_H      //DEMO速度快
     #define SPEED_DEMO_S    DEBUG_DEMO_SPEED_S      //DEMO速度超快
 #else
-    #define SPEED_DEFAULT    800      //初始速度
-    #define SPEED_MAX        100      //最高速度
+    #define SPEED_DEFAULT   4000      //初始速度
+    #define SPEED_MAX        500      //最高速度
     #define SPEED_INTERVAL    50      //每个等级速度相差的数值
     #define SPEED_DEMO_L     800      //DEMO速度慢(初始)
     #define SPEED_DEMO_M     500      //DEMO速度中

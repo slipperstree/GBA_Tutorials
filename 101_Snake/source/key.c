@@ -33,6 +33,9 @@ void keyScanCommon(u8 btnUpDown, pBtnEventFunc callBackFunc, u8 btnIdx);
 void KEY_keyscan(){
     u8 idx = 0;
 
+    //vblank_intr_wait();
+    PollKeys();
+
     // 依次扫描所有按键，并传递回调用的函数指针(理论上支持任意多个按键)
     #if KEY_CNT>0
         keyScanCommon(BTN1, btn1EventFunc, idx++);

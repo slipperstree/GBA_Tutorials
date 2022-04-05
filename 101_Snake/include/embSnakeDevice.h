@@ -30,53 +30,24 @@
     // ******* 2-根据硬件电气连接修改下列定义 ***********************************
 
         // ---------- 按键个数 ----------
-        #define KEY_CNT  3
+        #define KEY_CNT  8
 
         // ---------- 按键 IO口定义 ----------
         // BTNn的名字不要修改，预留了最多八个按键，不需要的无视即可
-        #define BTN1   1 //P37
-        #define BTN2   1 //P36
-        #define BTN3   1 //P35
-        #define BTN4   未使用 
-        #define BTN5   未使用 
-        #define BTN6   未使用
-        #define BTN7   未使用
-        #define BTN8   未使用
-
-        // ---------- 不同画面时按钮功能定义 ----------
-        // 数字为上面的IO口定义里面的BTN1 2 3..
-        // Demo-按键1=切换速度
-        #define DEV_BTN_NO_DEMO_CHANGE_SPEED    1
-        // Demo-按键2=切换声音
-        #define DEV_BTN_NO_DEMO_SWITCH_SOUND    2
-        // Demo-按键3=返回标题画面
-        #define DEV_BTN_NO_DEMO_BACK_TO_HOME    3
-
-        // 方向键使用4个按键的上下左右 还是 2个按键的左转右转（适合按键数比较少的设备）
-        // 放开该定义=使用2个按键的左转右转模式
-        // 删除该定义=使用4个按键的上下左右模式
-        // 学电只有3个按钮，不能直接4个方向，所以使用两个按钮左右转的模式
-        #define DEV_BTN_USE_TRUN_LR
-        #ifdef DEV_BTN_USE_TRUN_LR
-            // Game-按键1=左转
-            #define DEV_BTN_NO_GAME_TRUN_LEFT   1
-            // Game-按键3=右转
-            #define DEV_BTN_NO_GAME_TRUN_RIGHT  3
-        #else
-            #define DEV_BTN_NO_GAME_UP     1
-            #define DEV_BTN_NO_GAME_DOWN   2
-            #define DEV_BTN_NO_GAME_LEFT   3
-            #define DEV_BTN_NO_GAME_RIGHT  4
-        #endif
-
-        // Game-按键2=切换声音
-        #define DEV_BTN_NO_GAME_SWITCH_SOUND   2
+        #define BTN1   keyDown(UP)?1:0
+        #define BTN2   keyDown(DOWN)?1:0
+        #define BTN3   keyDown(LEFT)?1:0
+        #define BTN4   keyDown(RIGHT)?1:0
+        #define BTN5   keyDown(A)?1:0
+        #define BTN6   keyDown(B)?1:0
+        #define BTN7   keyDown(SELECT)?1:0
+        #define BTN8   keyDown(START)?1:0
                             
         // ---------- 按键 按下状态和电平状态对应关系，根据具体电路修改 ----------
-        // 按键按下为低电平
-        #define KEY_DOWN 0
-        // 按键未按下为高电平
-        #define KEY_UP   1
+        // 按键按下为真（参见gba_input.h）
+        #define KEY_DOWN 1
+        // 按键未按下为假
+        #define KEY_UP   0
 
     // ******* 3-根据需要适当修改下列用于判断单击，双击等各种按键动作判定的时间长短 ************
     // *******   并非以ms为单位，请根据实际速度调整到合适的数值） **************************

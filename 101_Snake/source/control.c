@@ -61,7 +61,8 @@ extern u8 buff[128];
 void CTL_run(){
 	u16 flashSpeed=0;
 
-    //TODO:GBA? KEY_keyscan();
+    KEY_keyscan();
+
     
     // TODO:GBA? 本来是在定时器中断里面做的，GBA定时器中断有吗？
     ttWalk++;
@@ -73,9 +74,9 @@ void CTL_run(){
     
     if (nowMode == MODE_WELCOME_DEMO)
     {
-        flashSpeed = 30000;
+        flashSpeed = 3000;
     } else {
-        flashSpeed = 30000;
+        flashSpeed = 3000;
     }
 
     if (ttFlag > flashSpeed)
@@ -219,8 +220,8 @@ void doBtnCommon(u8 btnNo, u8 event_id){
             // 继续判断是哪个按键
             switch (btnNo)
             {
-            case DEV_BTN_NO_DEMO_CHANGE_SPEED:
-                // Demo-按键1=切换速度
+            case B:
+                // Demo-按键B=切换速度
                 if (nowSpeed == SPEED_DEMO_L) {
                     setDemoSpeed(SPEED_DEMO_M);
                 } else if (nowSpeed == SPEED_DEMO_M) {
@@ -231,15 +232,13 @@ void doBtnCommon(u8 btnNo, u8 event_id){
                     setDemoSpeed(SPEED_DEMO_L);
                 }
                 break;
-            case DEV_BTN_NO_DEMO_SWITCH_SOUND:
-                // Demo-按键2=切换声音
+            case SELECT:
+                // Demo-按键SELECT=切换声音
                 switchSound();
                 break;
-            case DEV_BTN_NO_DEMO_BACK_TO_HOME:
-                // Demo-按键3=返回标题画面
-                goPageWelcome(DISP_NO);
-                break;
             default:
+                // Demo-其他按键=返回标题画面
+                goPageWelcome(DISP_NO);
                 break;
             }
             break;
@@ -256,51 +255,32 @@ void doBtnCommon(u8 btnNo, u8 event_id){
             // LOG("KEY_EVENT_DOWN in MODE_GAME\r\n");
             // sprintf(buff, "btn=%b2d nowModeA=%b2d\r\n", btnNo, nowMode);LOG(buff);
 
-            // 左右转动双键模式 / 上下左右全键模式
-            #ifdef DEV_BTN_USE_TRUN_LR
-                
-                if ((btnNo == DEV_BTN_NO_GAME_TRUN_LEFT && SNAKE_turnLeft()) || 
-                    (btnNo == DEV_BTN_NO_GAME_TRUN_RIGHT && SNAKE_turnRight())){
-                    // 手动移动成功的话，自动前进计时清零
-                    ttWalk = 0;
-                }
-            #else
+            // 手动移动成功的话，自动前进计时清零
+            if ((btnNo == UP && SNAKE_moveUp()) || 
+                (btnNo == DOWN && SNAKE_moveDown()) ||
+                (btnNo == LEFT && SNAKE_moveLeft()) ||
+                (btnNo == RIGHT && SNAKE_moveRight())
+                ) {
                 // 手动移动成功的话，自动前进计时清零
-                if ((btnNo == DEV_BTN_NO_GAME_UP && SNAKE_moveLeft()) || 
-                    (btnNo == DEV_BTN_NO_GAME_DOWN && SNAKE_moveDown()) ||
-                    (btnNo == DEV_BTN_NO_GAME_LEFT && SNAKE_moveLeft()) ||
-                    (btnNo == DEV_BTN_NO_GAME_RIGHT && SNAKE_moveRight())
-                    ) {
-                    // 手动移动成功的话，自动前进计时清零
-                    ttWalk = 0;
-                }
-            #endif
+                ttWalk = 0;
+            }
 
-            if (btnNo == DEV_BTN_NO_GAME_SWITCH_SOUND) {
-                // 按键2=切换声音
+            if (btnNo == SELECT) {
+                // 切换声音
                 switchSound();
             }
             break;
         // 按键按被按住不放（连发）
         case KEY_EVENT_KEEPING_PRESS:
-            #ifdef DEV_BTN_USE_TRUN_LR
-                // 按下1，3转向后如果继续按住不松手，向转向后的方向(按2则是前进方向)不断前进直到松手(而不是没有意义地不停转圈)
-                if (btnNo == DEV_BTN_NO_GAME_TRUN_LEFT || btnNo == DEV_BTN_NO_GAME_TRUN_RIGHT)
-                {
-                    SNAKE_moveNext();
-                    ttWalk = 0;
-                }
-            #else
-                if (btnNo == DEV_BTN_NO_GAME_UP || 
-                    btnNo == DEV_BTN_NO_GAME_DOWN || 
-                    btnNo == DEV_BTN_NO_GAME_LEFT || 
-                    btnNo == DEV_BTN_NO_GAME_RIGHT
-                    )
-                {
-                    SNAKE_moveNext();
-                    ttWalk = 0;
-                }
-            #endif
+            if ((btnNo == UP && SNAKE_moveUp()) || 
+                (btnNo == DOWN && SNAKE_moveDown()) ||
+                (btnNo == LEFT && SNAKE_moveLeft()) ||
+                (btnNo == RIGHT && SNAKE_moveRight())
+                )
+            {
+                SNAKE_moveNext();
+                ttWalk = 0;
+            }
             break;
         default:
             break;
@@ -330,27 +310,35 @@ void doBtnCommon(u8 btnNo, u8 event_id){
 // 按键个别处理，响应按键事件
 // =====================================
 void eventKey1(u8 event_id){
-    doBtnCommon(1, event_id);
+    doBtnCommon(UP, event_id);
 }
 
 void eventKey2(u8 event_id){
-    doBtnCommon(2, event_id);
+    doBtnCommon(DOWN, event_id);
 }
 
 void eventKey3(u8 event_id){
-    doBtnCommon(3, event_id);
+    doBtnCommon(LEFT, event_id);
 }
 
 void eventKey4(u8 event_id){
-    doBtnCommon(4, event_id);
+    doBtnCommon(RIGHT, event_id);
 }
 
 void eventKey5(u8 event_id){
-    doBtnCommon(5, event_id);
+    doBtnCommon(A, event_id);
 }
 
 void eventKey6(u8 event_id){
-    doBtnCommon(6, event_id);
+    doBtnCommon(B, event_id);
+}
+
+void eventKey7(u8 event_id){
+    doBtnCommon(SELECT, event_id);
+}
+
+void eventKey8(u8 event_id){
+    doBtnCommon(START, event_id);
 }
 
 void eventSnake(){
@@ -396,7 +384,7 @@ void eventSnake(){
         if (nowMode == MODE_GAME)
         {
             //先停一会死掉的状态
-            My_delay_ms(1000);
+            My_delay_ms(2000);
 
             devEnterGameOverPage();
 
@@ -589,7 +577,7 @@ void CTL_init() {
     DISP_setFrameColor(gSetting.colorFrame);
 
     DISP_init();
-    KEY_init(eventKey1, eventKey2, eventKey3, eventKey4, eventKey5, eventKey6, 0, 0);
+    KEY_init(eventKey1, eventKey2, eventKey3, eventKey4, eventKey5, eventKey6, eventKey7, eventKey8);
     SNAKE_init(eventSnake);
     
     #if ISDEBUG

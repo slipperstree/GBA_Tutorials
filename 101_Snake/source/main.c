@@ -17,7 +17,7 @@ int main()
 	//set GBA rendering context to MODE 3 Bitmap Rendering
 	REG_DISPCNT = VIDEOMODE_3 | BGMODE_2;
 
-	// register_vblank_isr();
+	//register_vblank_isr();
 
 	gba_seed_rand(14);
 	// Paddle p1;

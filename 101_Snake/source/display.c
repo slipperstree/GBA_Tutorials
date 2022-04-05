@@ -9,9 +9,9 @@
 // 屏幕较小的话要改短一些,大屏也不要太长,预留的缓冲区只有128字节,超出的话会发生未知问题
 u8* STR_PRESS_ANY_KEY_CN             = (u8*)"  按任意键继续..";
 u8* STR_PRESS_ANY_KEY_EN             = (u8*)"Press Any Key..";
-u8* STR_DEMO_MENU_CN                 = (u8*)"壹速度 貳声音 叁返回";  //壹貳叁代表按钮①②③图标
+u8* STR_DEMO_MENU_CN                 = (u8*)"壹速 貳声音 叁返";  //壹貳叁代表按钮①②③图标
 u8* STR_DEMO_MENU_EN                 = (u8*)"壹Sound 貳Speed 叁Back";
-u8* STR_GAME_MENU_CN                 = (u8*)"壹左转 貳声音 叁右转";  //壹貳叁代表按钮①②③图标
+u8* STR_GAME_MENU_CN                 = (u8*)"壹左 貳声音 叁右";  //壹貳叁代表按钮①②③图标
 u8* STR_GAME_MENU_EN                 = (u8*)"壹Left 貳Foward 叁Right";
 u8* STR_GAMEOVER_GAMEOVER_CN         = (u8*)"游戏结束";
 u8* STR_GAMEOVER_GAMEOVER_EN         = (u8*)"Game Over";
@@ -21,6 +21,10 @@ u8* STR_GAMEOVER_HSCORE_CN           = (u8*)"记录:";
 u8* STR_GAMEOVER_HSCORE_EN           = (u8*)"Record";
 u8* STR_GAMEOVER_SCORE_CN            = (u8*)"得分:";
 u8* STR_GAMEOVER_SCORE_EN            = (u8*)"Score:";
+
+#define  TITLE_Y         15
+#define  SCROE_Y         60
+#define HSCROE_Y        100
 
 // 框架厚度（drawFrame中计算并设置）
 u8 frameThickness=1;
@@ -459,7 +463,7 @@ void DISP_drawWelcome(u8 isStartUp){
     #ifdef UI_LANG_CN
         // 标题 贪吃蛇
         titleStartX = (SCREEN_W - FONTHZ_TITLE64.fontWidth * 4) / 2;
-        titleY = SCREEN_H/6;
+        titleY = SCREEN_H/8;
         showChar(titleStartX, titleY, "贪", &FONTHZ_TITLE64, COLOR_BG, COLOR_TITLE1);
         showChar(titleStartX + FONTHZ_TITLE64.fontWidth + FONTHZ_TITLE64.fontWidth/2, titleY, "吃", &FONTHZ_TITLE64, COLOR_BG, COLOR_TITLE1);
         showChar(titleStartX + FONTHZ_TITLE64.fontWidth*3, titleY, "蛇", &FONTHZ_TITLE64, COLOR_BG, COLOR_TITLE2);
@@ -474,7 +478,7 @@ void DISP_drawWelcome(u8 isStartUp){
             My_delay_ms(1000);
             // 学电LOGO缓缓出现的动画效果
             while(1){
-                r+=5;
+                r+=10;
                 if (r>=256) break;
                 showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toBGR555(r, 0, 0), COLOR_BG);
             }
@@ -484,7 +488,7 @@ void DISP_drawWelcome(u8 isStartUp){
             // 非上电画面，快速显示
             // 学电LOGO缓缓出现的动画效果
             while(r<255){
-                r+=10;
+                r+=20;
                 if (r>=256) r = 255;
                 showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toBGR555(r, 0, 0), COLOR_BG);
             }
@@ -513,7 +517,7 @@ void DISP_flashWelcome(u8 flashOnOff){
         
         // 学电LOGO变幻颜色
         logoX = (SCREEN_W - FONTHZ_XD_LOGO40.fontWidth) / 2;
-        logoY = SCREEN_H/6 + FONTHZ_TITLE64.fontHeight + FONTHZ_XD_LOGO40.fontHeight / 2;
+        logoY = SCREEN_H/8 + FONTHZ_TITLE64.fontHeight + FONTHZ_XD_LOGO40.fontHeight / 2;
         showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, randBGR565(), COLOR_BG);
 
         // 闪烁文字
@@ -672,10 +676,6 @@ void DISP_drawGameOver(u16 score, u16 hiScore){
     u8 buff1[16];
     clearScreen();
 
-    #define  TITLE_Y         35
-    #define  SCROE_Y         80
-    #define HSCROE_Y        120
-
     #ifdef UI_LANG_EN
         // 英文界面
         showStringCenter(5, "________________", &FONT8, 0);
@@ -717,7 +717,7 @@ void DISP_flashGameOver(u8 flashOnOff, u8 isNewRecord){
         if (isNewRecord)
         {
             // 刷新记录动态效果
-            showStringCenterColor(35, STR_GAMEOVER_NEWRECORD_CN, &FONTHZ32, COLOR_BG, randBGR565(), 0);
+            showStringCenterColor(TITLE_Y, STR_GAMEOVER_NEWRECORD_CN, &FONTHZ32, COLOR_BG, randBGR565(), 0);
         }
 
         // 底部闪烁文字 按任意键继续...
