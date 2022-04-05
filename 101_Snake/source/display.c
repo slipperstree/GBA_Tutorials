@@ -102,7 +102,7 @@ u16 randRGB565(){
         }
         break;
     }
-    return RGB888toRGB555(r, g, b);
+    return RGB888toBGR555(r, g, b);
 }
 
 void clearScreen(void){
@@ -476,7 +476,7 @@ void DISP_drawWelcome(u8 isStartUp){
             while(1){
                 r+=1;
                 if (r>=256) break;
-                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toRGB555(r, 0, 0), COLOR_BG);
+                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toBGR555(r, 0, 0), COLOR_BG);
             }
             // 出现后等待一会儿
             //TODO:GBA? Pre_Delay_ms(1000);
@@ -486,7 +486,7 @@ void DISP_drawWelcome(u8 isStartUp){
             while(r<255){
                 r+=5;
                 if (r>=256) r = 255;
-                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toRGB555(r, 0, 0), COLOR_BG);
+                showChar(logoX, logoY, FONT_HZ_XD_LOGO, &FONTHZ_XD_LOGO40, RGB888toBGR555(r, 0, 0), COLOR_BG);
             }
             // 出现后等待一会儿
             //TODO:GBA? Pre_Delay_ms(500);

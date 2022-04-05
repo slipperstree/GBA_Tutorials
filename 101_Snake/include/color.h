@@ -37,6 +37,7 @@ typedef unsigned long       COLORREF;
 #define RGB888toRGB565(r, g, b) ((WORD)((((WORD)(r) << 8) & 0xF800) | ((((WORD)(g)) << 3) & 0x7E0) | (((WORD)(b)) >> 3)))
 #define RGBtoRGB565(rgb) ((WORD)(((((WORD)((rgb) >> 3)) & (0x1F)) << 11) | ((((WORD)((rgb) >> 10)) & (0x3F)) << 5) | (((WORD)((rgb) >> 19)) & 
 
+#define RGB888toBGR555(r, g, b) ((WORD)(((((WORD)(b)) << 7) & 0x7C00) | ((((WORD)(g)) << 2) & 0x3E0) | (((WORD)(r)) >> 3)))
 
 #define RGB888toRGB555(r, g, b) ((WORD)(((((WORD)(r)) << 7) & 0x7C00) | ((((WORD)(g)) << 2) & 0x3E0) | (((WORD)(b)) >> 3)))
 #define RGBtoRGB555(rgb) ((WORD)(((((WORD)((rgb) >> 3)) & (0x1F)) << 10) | ((((WORD)((rgb) >> 11)) & (0x1F)) << 5) | (((WORD)((rgb) >> 19)) & (0x1F))))
@@ -52,10 +53,10 @@ typedef unsigned long       COLORREF;
 #endif
 #endif
 
-// 常用16位RGB565颜色
+// 常用16位BGR555颜色(GBA 的颜色系统 15位色 红色在低位 所以是BGR555ß)
 #define COLOR_RED          0x013f	  //红色
 #define COLOR_GREEN        0x03e0	  //绿色
-#define COLOR_GREENDK      RGB888toRGB555(10,100,0)
+#define COLOR_GREENDK      RGB888toBGR555(10,100,0)
 #define COLOR_GREENLT      0x1f36
 #define COLOR_BLUE         0x1f	        //蓝色
 #define COLOR_BLUELT       0x7daf	    //浅蓝色
@@ -63,7 +64,7 @@ typedef unsigned long       COLORREF;
 #define COLOR_YELLOW       0x3eff	    //黄色
 #define COLOR_BLACK        0X0000	    //黑色
 #define COLOR_WHITE        0x7fff	    //白色
-#define COLOR_SKY          RGB888toRGB555(88,80,216)
+#define COLOR_SKY          RGB888toBGR555(88,80,216)
 #define COLOR_SKYLT        0x7f33
 #define COLOR_BROWN        0x0bf1
 #define COLOR_BROWNLT      0x3cff
@@ -76,10 +77,10 @@ typedef unsigned long       COLORREF;
 #define COLOR_GRAYBLUEDK   0x3cc0 	    //深灰蓝色
 #define COLOR_PORPO        0x7c10	    //紫色
 #define COLOR_PINK         0x7f1f	    //粉红色
-#define COLOR_WINLOGO_R    RGB888toRGB555(240,101,43)
-#define COLOR_WINLOGO_G    RGB888toRGB555(140,189,0)
-#define COLOR_WINLOGO_B    RGB888toRGB555(49,174,233)
-#define COLOR_WINLOGO_Y    RGB888toRGB555(247,189,1)
+#define COLOR_WINLOGO_R    RGB888toBGR555(240,101,43)
+#define COLOR_WINLOGO_G    RGB888toBGR555(140,189,0)
+#define COLOR_WINLOGO_B    RGB888toBGR555(49,174,233)
+#define COLOR_WINLOGO_Y    RGB888toBGR555(247,189,1)
 
 
 
