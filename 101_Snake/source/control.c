@@ -383,6 +383,11 @@ void eventSnake(){
 
         if (nowMode == MODE_GAME)
         {
+            if (gSetting.soundOnOff)
+            {
+                devPlaySound(SOUND_GAMEOVER);
+            }
+
             //先停一会死掉的状态
             My_delay_ms(2000);
 

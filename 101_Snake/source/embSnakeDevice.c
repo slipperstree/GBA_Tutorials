@@ -186,6 +186,41 @@ void devSndInit(){
 	REG_SND1SWEEP= SSW_OFF;
 }
 
+//  超级马里奥死亡时的音乐
+//  5444321
+//  .
+//  GFFFEDC
+//  .
+void devSndGameOver(){
+    // envelope: vol=12, decay, max step time (7) ; 50% duty
+	REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 1) | SSQR_DUTY1_2;
+	REG_SND1FREQ= 0;
+
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 1);
+    My_delay_ms(150);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 1);
+    My_delay_ms(600);
+
+    REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 1) | SSQR_DUTY1_2;
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 0);
+    My_delay_ms(200);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
+    My_delay_ms(300);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
+    My_delay_ms(150);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
+    My_delay_ms(200);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
+    My_delay_ms(200);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_E, 1);
+    My_delay_ms(200);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_D, 1);
+    My_delay_ms(200);
+
+    REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 4) | SSQR_DUTY1_2;
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_C, 1);
+}
+
 void devSndBeep(u8 beepLen){
     // envelope: vol=12, decay, max step time (7) ; 50% duty
 	REG_SND1CNT= SSQR_ENV_BUILD(12, 0, beepLen) | SSQR_DUTY1_2;
@@ -214,6 +249,7 @@ void devPlaySound(Sound_Type soundType){
     case SOUND_DEAD:
         break;
     case SOUND_GAMEOVER:
+        devSndGameOver();
         break;
     default:
         break;
