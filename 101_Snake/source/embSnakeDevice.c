@@ -8,7 +8,6 @@
 
 #include "embSnakeDevice.h"
 #include "boradSupport.h"
-#include "gba_drawing.h"
 
 // 临时变量用(sprintf等)
 extern u8 buff[128];
@@ -36,7 +35,8 @@ void devDisplayInit(u16 bgColor){
 
 // 填充一个矩形区域
 void devFillRectange(u16 x, u16 y, u16 width, u16 height, u16 color){
-    drawRect(x, y, width, height, color);
+    //drawRect(x, y, width, height, color);         // for gba_drawing.h
+    m3_rect(x, y, x+width, y+height, color);    // for tonc_video.h
 }
 
 // 为绘制一个区域做准备。（外部调用了这个函数后会批量调用devPointInDrawArea来绘制各种图案或点阵文字）
@@ -63,15 +63,26 @@ void devPointInDrawArea(u16 color){
     if (drawAreaCurrY>drawAreaEndY) return;
 
     // 在当前位置绘制一个点
-    drawPoint(drawAreaCurrX, drawAreaCurrY, color);
+    //drawPoint(drawAreaCurrX, drawAreaCurrY, color);   // for gba_drawing.h
+    m3_plot(drawAreaCurrX, drawAreaCurrY, color);       // for tonc_video.h
 
     drawAreaCurrX++;
 }
 
+void myDrawLineWidth(u16 x1, u16 y1, u16 x2, u16 y2, u16 width, u16 color){
+
+    //drawLineWidth(x1, y1, x2, y2, width, color);   // for gba_drawing.h
+
+    // for gba_drawing.h
+    for ( u16 w = 0; w < width; w++ ) {
+        m3_line(x1+w, y1, x2+w, y2, color);
+    }
+    
+}
+
 // 绘制直线
 void devDrawLine(u16 x1, u16 y1, u16 x2, u16 y2, u16 width, u16 color){
-    //TODO: 线宽没有实现
-    drawLineWidth(x1, y1, x2, y2, width, color);
+    myDrawLineWidth(x1, y1, x2, y2, width, color);
 }
 
 // 关闭屏幕显示(跟函数devScreenON搭配使用，如无必要可不用实现留空即可，实现了更好，可以防止刷新画面的过程被用户看见)

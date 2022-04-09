@@ -3,7 +3,7 @@
 #ifndef __FONT_H_
 #define __FONT_H_
 
-#include "gba_types.h"
+#include "tonc.h"
 
 // 字库结构体定义。不要修改 ----------
 typedef struct 

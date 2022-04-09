@@ -220,7 +220,7 @@ void doBtnCommon(u8 btnNo, u8 event_id){
             // 继续判断是哪个按键
             switch (btnNo)
             {
-            case B:
+            case KEY_B:
                 // Demo-按键B=切换速度
                 if (nowSpeed == SPEED_DEMO_L) {
                     setDemoSpeed(SPEED_DEMO_M);
@@ -232,7 +232,7 @@ void doBtnCommon(u8 btnNo, u8 event_id){
                     setDemoSpeed(SPEED_DEMO_L);
                 }
                 break;
-            case SELECT:
+            case KEY_SELECT:
                 // Demo-按键SELECT=切换声音
                 switchSound();
                 break;
@@ -256,26 +256,26 @@ void doBtnCommon(u8 btnNo, u8 event_id){
             // sprintf(buff, "btn=%b2d nowModeA=%b2d\r\n", btnNo, nowMode);LOG(buff);
 
             // 手动移动成功的话，自动前进计时清零
-            if ((btnNo == UP && SNAKE_moveUp()) || 
-                (btnNo == DOWN && SNAKE_moveDown()) ||
-                (btnNo == LEFT && SNAKE_moveLeft()) ||
-                (btnNo == RIGHT && SNAKE_moveRight())
+            if ((btnNo == KEY_UP && SNAKE_moveUp()) || 
+                (btnNo == KEY_DOWN && SNAKE_moveDown()) ||
+                (btnNo == KEY_LEFT && SNAKE_moveLeft()) ||
+                (btnNo == KEY_RIGHT && SNAKE_moveRight())
                 ) {
                 // 手动移动成功的话，自动前进计时清零
                 ttWalk = 0;
             }
 
-            if (btnNo == SELECT) {
+            if (btnNo == KEY_SELECT) {
                 // 切换声音
                 switchSound();
             }
             break;
         // 按键按被按住不放（连发）
         case KEY_EVENT_KEEPING_PRESS:
-            if ((btnNo == UP && SNAKE_moveUp()) || 
-                (btnNo == DOWN && SNAKE_moveDown()) ||
-                (btnNo == LEFT && SNAKE_moveLeft()) ||
-                (btnNo == RIGHT && SNAKE_moveRight())
+            if ((btnNo == KEY_UP && SNAKE_moveUp()) || 
+                (btnNo == KEY_DOWN && SNAKE_moveDown()) ||
+                (btnNo == KEY_LEFT && SNAKE_moveLeft()) ||
+                (btnNo == KEY_RIGHT && SNAKE_moveRight())
                 )
             {
                 SNAKE_moveNext();
@@ -310,35 +310,35 @@ void doBtnCommon(u8 btnNo, u8 event_id){
 // 按键个别处理，响应按键事件
 // =====================================
 void eventKey1(u8 event_id){
-    doBtnCommon(UP, event_id);
+    doBtnCommon(KEY_UP, event_id);
 }
 
 void eventKey2(u8 event_id){
-    doBtnCommon(DOWN, event_id);
+    doBtnCommon(KEY_DOWN, event_id);
 }
 
 void eventKey3(u8 event_id){
-    doBtnCommon(LEFT, event_id);
+    doBtnCommon(KEY_LEFT, event_id);
 }
 
 void eventKey4(u8 event_id){
-    doBtnCommon(RIGHT, event_id);
+    doBtnCommon(KEY_RIGHT, event_id);
 }
 
 void eventKey5(u8 event_id){
-    doBtnCommon(A, event_id);
+    doBtnCommon(KEY_A, event_id);
 }
 
 void eventKey6(u8 event_id){
-    doBtnCommon(B, event_id);
+    doBtnCommon(KEY_B, event_id);
 }
 
 void eventKey7(u8 event_id){
-    doBtnCommon(SELECT, event_id);
+    doBtnCommon(KEY_SELECT, event_id);
 }
 
 void eventKey8(u8 event_id){
-    doBtnCommon(START, event_id);
+    doBtnCommon(KEY_START, event_id);
 }
 
 void eventSnake(){

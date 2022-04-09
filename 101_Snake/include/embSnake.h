@@ -11,7 +11,7 @@
 #ifndef __EMB_SNAKE_H_
 #define __EMB_SNAKE_H_
 
-#include "gba_types.h"
+#include "tonc_types.h"
 
 // ### 贪食蛇模块 定义 根据需要修改以下定义 ##################################################################
 

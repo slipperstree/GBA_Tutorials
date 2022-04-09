@@ -34,20 +34,20 @@
 
         // ---------- 按键 IO口定义 ----------
         // BTNn的名字不要修改，预留了最多八个按键，不需要的无视即可
-        #define BTN1   keyDown(UP)?1:0
-        #define BTN2   keyDown(DOWN)?1:0
-        #define BTN3   keyDown(LEFT)?1:0
-        #define BTN4   keyDown(RIGHT)?1:0
-        #define BTN5   keyDown(A)?1:0
-        #define BTN6   keyDown(B)?1:0
-        #define BTN7   keyDown(SELECT)?1:0
-        #define BTN8   keyDown(START)?1:0
+        #define BTN1   key_is_down(KEY_UP)?1:0
+        #define BTN2   key_is_down(KEY_DOWN)?1:0
+        #define BTN3   key_is_down(KEY_LEFT)?1:0
+        #define BTN4   key_is_down(KEY_RIGHT)?1:0
+        #define BTN5   key_is_down(KEY_A)?1:0
+        #define BTN6   key_is_down(KEY_B)?1:0
+        #define BTN7   key_is_down(KEY_SELECT)?1:0
+        #define BTN8   key_is_down(KEY_START)?1:0
                             
         // ---------- 按键 按下状态和电平状态对应关系，根据具体电路修改 ----------
         // 按键按下为真（参见gba_input.h）
-        #define KEY_DOWN 1
+        #define KEY_DOWN_VALUE 1
         // 按键未按下为假
-        #define KEY_UP   0
+        #define KEY_UP_VALUE   0
 
     // ******* 3-根据需要适当修改下列用于判断单击，双击等各种按键动作判定的时间长短 ************
     // *******   并非以ms为单位，请根据实际速度调整到合适的数值） **************************

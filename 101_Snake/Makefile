@@ -49,14 +49,18 @@ LDFLAGS	=	-g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:= -lmm -lgba
+# add tonclib by mango
+#LIBS	:= -lmm -lgba
+LIBS	:= -ltonc
  
  
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:=	$(LIBGBA)
+# add tonclib by mango
+#LIBDIRS	:=	$(LIBGBA) $(PROJDIR)/../tonclib
+LIBDIRS	:=	$(PROJDIR)/../tonclib
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -108,7 +112,7 @@ export OFILES := $(OFILES_BIN) $(OFILES_SOURCES)
 export HFILES := $(addsuffix .h,$(subst .,_,$(BINFILES)))
 
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(PROJDIR)/$(dir)) \
-					$(foreach dir,$(LIBDIRS),-I$(PWD)/$(dir)/include) \
+					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 					-I$(BUILD)
  
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
@@ -118,6 +122,8 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 #---------------------------------------------------------------------------------
 $(BUILD):
 # @echo CURDIR=$(CURDIR)
+	@echo LIBPATHS=$(LIBPATHS)
+	@echo INCLUDE=$(INCLUDE)
 
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) BUILDDIR=`cd $(BUILD) && pwd` --no-print-directory -C $(BUILD) -f $(PROJDIR)/Makefile

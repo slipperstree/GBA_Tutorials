@@ -1,13 +1,12 @@
 #ifndef __EMB_SNAKE_COMMON_H_
 #define __EMB_SNAKE_COMMON_H_
 
-#include "gba_types.h"
 #include "binary.h"
 #include "font.h"
 #include "color.h"
-#include "gba_mathUtil.h"
-#include "gba_input.h"
-#include "gba_bios.h"
+#include "myMathUtil.h"
+
+#include "tonc.h"
 
 void My_delay_ms(u16 n);
 u8 My_strlen(char* x);
