@@ -144,6 +144,9 @@ typedef enum
 } Sound_Type;
 void devPlaySound(Sound_Type soundType);
 
+void devSndInit();
+void devSndBeepShort();
+
 // 设置保存/读取
 typedef struct
 {

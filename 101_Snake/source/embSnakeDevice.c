@@ -173,13 +173,39 @@ void devSaveSetting(SaveData_Struct *setting){
 // ==    声音相关       =====================================================================
 // =========================================================================================
 
+// 声音模块初始化
+void devSndInit(){
+    // turn sound on
+	REG_SNDSTAT= SSTAT_ENABLE;
+	// snd1 on left/right ; both full volume
+	REG_SNDDMGCNT = SDMG_BUILD_LR(SDMG_SQR1, 7);
+	// DMG ratio to 100%
+	REG_SNDDSCNT= SDS_DMG100;
+
+	// no sweep
+	REG_SND1SWEEP= SSW_OFF;
+}
+
+void devSndBeep(u8 beepLen){
+    // envelope: vol=12, decay, max step time (7) ; 50% duty
+	REG_SND1CNT= SSQR_ENV_BUILD(12, 0, beepLen) | SSQR_DUTY1_2;
+	REG_SND1FREQ= 0;
+
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_A, 0);
+}
+
+// 短beep声音
+void devSndBeepShort(){
+    devSndBeep(1);
+}
+
 // 播放声音
 void devPlaySound(Sound_Type soundType){
 
     switch (soundType)
     {
     case SOUND_EAT_APPLE:
-        BEEP_SHORT();
+        devSndBeepShort();
         break;
     case SOUND_HISCORE:
         break;

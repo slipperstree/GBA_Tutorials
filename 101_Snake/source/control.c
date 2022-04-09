@@ -577,6 +577,7 @@ void CTL_init() {
     DISP_setFrameColor(gSetting.colorFrame);
 
     DISP_init();
+    devSndInit();
     KEY_init(eventKey1, eventKey2, eventKey3, eventKey4, eventKey5, eventKey6, eventKey7, eventKey8);
     SNAKE_init(eventSnake);
     
