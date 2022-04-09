@@ -54,13 +54,14 @@ void devPrepareForDrawArea(u16 startX, u16 startY, u16 areaWidth, u16 areaHeight
 
 // 绘制一个指定颜色的点，无需考虑坐标位置。（外部会先调用函数devPrepareForDrawArea以确定绘图范围）
 void devPointInDrawArea(u16 color){
+
     if (drawAreaCurrX>drawAreaEndX) {
         drawAreaCurrX=drawAreaStartX;
         drawAreaCurrY++;
     }
 
     // 已经超出指定绘图范围，不绘制
-    if (drawAreaCurrY>drawAreaEndY) return;
+    if (drawAreaCurrY>drawAreaEndY || drawAreaCurrY > SCREEN_H || drawAreaCurrX > SCREEN_W) return;
 
     // 在当前位置绘制一个点
     //drawPoint(drawAreaCurrX, drawAreaCurrY, color);   // for gba_drawing.h
