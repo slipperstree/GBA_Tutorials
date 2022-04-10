@@ -50,8 +50,8 @@ LDFLAGS	=	-g $(ARCH) -Wl,-Map,$(notdir $*.map)
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
 # add tonclib by mango
-#LIBS	:= -lmm -lgba
-LIBS	:= -ltonc
+LIBS	:= -lmm -lgba -ltonc
+#LIBS	:= -ltonc
  
  
 #---------------------------------------------------------------------------------
@@ -59,8 +59,8 @@ LIBS	:= -ltonc
 # include and lib
 #---------------------------------------------------------------------------------
 # add tonclib by mango
-#LIBDIRS	:=	$(LIBGBA) $(PROJDIR)/../tonclib
-LIBDIRS	:=	$(PROJDIR)/../tonclib
+LIBDIRS	:=	$(LIBGBA) $(DEVKITPRO)/libtonc
+#LIBDIRS	:=	$(PROJDIR)/../tonclib
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
