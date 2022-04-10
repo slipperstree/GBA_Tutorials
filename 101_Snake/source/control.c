@@ -165,9 +165,9 @@ void CTL_run(){
             }
             break;
         case MODE_GAMEOVER:
-            // Gameover画面动态效果
+            // Gameover画面动态效果 TODO:影响声音播放，暂时不闪烁
             if (flashFlag == 1) {
-                DISP_flashGameOver(flashOnOff, lastGameScore > oldSaveDataHScore ? 1 : 0);
+                //DISP_flashGameOver(flashOnOff, lastGameScore > oldSaveDataHScore ? 1 : 0);
             }
             break;
         default:
@@ -389,6 +389,7 @@ void eventSnake(){
             }
 
             //先停一会死掉的状态(TODO:GBA 这里会影响死掉时候的maxmod声音播放？？)
+            //TODO:这里不要用延时，改成订阅等待帧数的方式，等帧数到达指定数字之后执行回调函数。
             My_delay_ms(2000);
 
             devEnterGameOverPage();
