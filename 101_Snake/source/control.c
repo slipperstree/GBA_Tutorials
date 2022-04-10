@@ -74,9 +74,9 @@ void CTL_run(){
     
     if (nowMode == MODE_WELCOME_DEMO)
     {
-        flashSpeed = 3000;
+        flashSpeed = 20;
     } else {
-        flashSpeed = 3000;
+        flashSpeed = 20;
     }
 
     if (ttFlag > flashSpeed)
@@ -388,7 +388,7 @@ void eventSnake(){
                 devPlaySound(SOUND_GAMEOVER);
             }
 
-            //先停一会死掉的状态
+            //先停一会死掉的状态(TODO:GBA 这里会影响死掉时候的maxmod声音播放？？)
             My_delay_ms(2000);
 
             devEnterGameOverPage();
@@ -573,7 +573,7 @@ void CTL_init() {
     SD_loadSetting();
 
     // 上电默认demo速度（这个不做保存，没啥意义）
-    lastDemoSpeed = SPEED_DEMO_M;
+    lastDemoSpeed = SPEED_DEMO_H;
 
     DISP_setBackColor(gSetting.colorBackGround);
     DISP_setForeColor(gSetting.colorFront);

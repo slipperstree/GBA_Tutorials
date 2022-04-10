@@ -174,6 +174,18 @@ void devSaveSetting(SaveData_Struct *setting){
 // ==    声音相关       =====================================================================
 // =========================================================================================
 
+// maxmod 声音资源定义
+mm_sound_effect mariodead = {
+		{ SFX_MARIODEAD } ,			// id
+		(int)(1.0f * (1<<10)),	// rate
+		0,		// handle
+		255,	// volume
+		0,		// panning
+	};
+
+// sound effect handle (for cancelling it later)
+mm_sfxhand amb = 0;
+
 // 声音模块初始化
 void devSndInit(){
     // turn sound on
@@ -185,6 +197,15 @@ void devSndInit(){
 
 	// no sweep
 	REG_SND1SWEEP= SSW_OFF;
+
+    // maxmod模块初始化
+    // initialise maxmod with soundbank and 8 channels
+    mmInitDefault( (mm_addr)soundbank_bin, 8 );
+
+}
+
+void playMaxmodSnd(){
+    mmEffectEx(&mariodead);
 }
 
 //  超级马里奥死亡时的音乐
@@ -192,7 +213,7 @@ void devSndInit(){
 //  .      ...
 //  GFFFEDCGGC
 //  .      ...
-void devSndGameOver(){
+void playGameOver(){
     #define TUNE_TEMPAL_1 180
     #define TUNE_TEMPAL_2 TUNE_TEMPAL_1*1.5
     // envelope: vol=12, decay, max step time (7) ; 50% duty
@@ -222,7 +243,7 @@ void devSndGameOver(){
     REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_C, 0);
 }
 
-void devSndBeep(u8 beepLen){
+void playBeep(u8 beepLen){
     // envelope: vol=12, decay, max step time (7) ; 50% duty
 	REG_SND1CNT= SSQR_ENV_BUILD(12, 0, beepLen) | SSQR_DUTY1_2;
 	REG_SND1FREQ= 0;
@@ -231,8 +252,8 @@ void devSndBeep(u8 beepLen){
 }
 
 // 短beep声音
-void devSndBeepShort(){
-    devSndBeep(1);
+void playBeepShort(){
+    playBeep(1);
 }
 
 // 播放声音
@@ -241,7 +262,7 @@ void devPlaySound(Sound_Type soundType){
     switch (soundType)
     {
     case SOUND_EAT_APPLE:
-        devSndBeepShort();
+        playBeepShort();
         break;
     case SOUND_HISCORE:
         break;
@@ -250,7 +271,8 @@ void devPlaySound(Sound_Type soundType){
     case SOUND_DEAD:
         break;
     case SOUND_GAMEOVER:
-        devSndGameOver();
+        //playGameOver();
+        playMaxmodSnd();
         break;
     default:
         break;
