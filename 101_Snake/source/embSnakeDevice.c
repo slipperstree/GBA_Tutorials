@@ -188,38 +188,38 @@ void devSndInit(){
 }
 
 //  超级马里奥死亡时的音乐
-//  5444321
-//  .
-//  GFFFEDC
-//  .
+//  5444321551
+//  .      ...
+//  GFFFEDCGGC
+//  .      ...
 void devSndGameOver(){
+    #define TUNE_TEMPAL_1 180
+    #define TUNE_TEMPAL_2 TUNE_TEMPAL_1*1.5
     // envelope: vol=12, decay, max step time (7) ; 50% duty
+    // 设置音量，混响衰减度，混响持续时间（1-7）等
 	REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 1) | SSQR_DUTY1_2;
 	REG_SND1FREQ= 0;
 
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 1);
-    My_delay_ms(150);
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 1);
-    My_delay_ms(600);
+    //REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 1); My_delay_ms(TUNE_TEMPAL_1);
+    //REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 1); My_delay_ms(TUNE_TEMPAL_2*2);
 
+    REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 2) | SSQR_DUTY1_2;
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 0); My_delay_ms(TUNE_TEMPAL_1);
     REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 1) | SSQR_DUTY1_2;
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 0);
-    My_delay_ms(200);
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
-    My_delay_ms(300);
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
-    My_delay_ms(150);
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
-    My_delay_ms(200);
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1);
-    My_delay_ms(200);
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_E, 1);
-    My_delay_ms(200);
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_D, 1);
-    My_delay_ms(200);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1); My_delay_ms(TUNE_TEMPAL_2);
+    REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 2) | SSQR_DUTY1_2;
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1); My_delay_ms(TUNE_TEMPAL_1);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_F, 1); My_delay_ms(TUNE_TEMPAL_1);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_E, 1); My_delay_ms(TUNE_TEMPAL_1);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_D, 1); My_delay_ms(TUNE_TEMPAL_1);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_C, 1); My_delay_ms(TUNE_TEMPAL_1);
+    REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 1) | SSQR_DUTY1_2;
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 0); My_delay_ms(TUNE_TEMPAL_2);
+    REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 2) | SSQR_DUTY1_2;
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_G, 0); My_delay_ms(TUNE_TEMPAL_1);
 
     REG_SND1CNT= SSQR_ENV_BUILD(12, 0, 4) | SSQR_DUTY1_2;
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_C, 1);
+    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_C, 0);
 }
 
 void devSndBeep(u8 beepLen){
